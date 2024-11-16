@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "vp-rn-template",
-    "slug": "vp-rn-template",
+    "name": "cards",
+    "slug": "cards",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
