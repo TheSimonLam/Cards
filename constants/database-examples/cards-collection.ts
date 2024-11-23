@@ -2,7 +2,7 @@ export const cards = {
   "41d-c61-c36-6gie10": {
     name: "Evil Cow",
     description: "This is the worlds most evil cow",
-    rarity: "Common",
+    rarity: 0,
     numInCirculation: 241,
     maxAllowedInCirculation: 5000,
     attack: 20,
@@ -11,7 +11,7 @@ export const cards = {
   "41d-c61-c36-6gie11": {
     name: "Crazy Hawk",
     description: "Hawk is coming for you",
-    rarity: "One of One",
+    rarity: 7,
     numInCirculation: 0,
     maxAllowedInCirculation: 1,
     attack: 5000,
@@ -20,7 +20,7 @@ export const cards = {
   "41d-c61-c36-6gie12": {
     name: "Death Eyes",
     description: "If you look into the eyes for too long you will die",
-    rarity: "Epic",
+    rarity: 5,
     numInCirculation: 241,
     maxAllowedInCirculation: 5000,
     attack: 100,
