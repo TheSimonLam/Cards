@@ -10,3 +10,22 @@ You can collect, battle with, and trade cards with other players.
 - Players will be able to see a global leaderboard
 - Players can earn credits by completing daily tasks/watching ads etc that can help with generating revenue
 - Opening packs of cards will always have a wow factor, and cards must look amazing/feel special and rare
+
+Tech used:
+Auth (Firebase/Clerk/Supabase)
+Supabase realtime subscription channels for games
+Firestore for Document/Collection database
+
+Card Rarity
+Common
+Uncommon
+Rare
+Ultra Rare
+Epic
+Legendary
+One of One
+
+Note:
+
+- Upon opening the app, re-download the entire cards database to use as metadata.
+- Maybe need a card opening server to securely randomise the opening of cards, and read/update the cards and decks collection database
