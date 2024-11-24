@@ -1,11 +1,21 @@
-import { StyleSheet, Platform } from "react-native";
+import { StyleSheet, Button } from "react-native";
 
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants/Colors";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useDispatch, useSelector } from "react-redux";
+import { increment, selectUserValue } from "../features/user/userSlice";
 
 export default function HomeScreen() {
+  const dispatch = useDispatch();
+
+  const counter = useSelector(selectUserValue);
+
+  const handleButtonPress = () => {
+    dispatch(increment());
+  };
+
   return (
     <SafeAreaView>
       <ThemedView
@@ -16,8 +26,8 @@ export default function HomeScreen() {
           <ThemedText type="title">Welcome to Cards!</ThemedText>
         </ThemedView>
         <ThemedView style={styles.stepContainer}>
-          <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-          <ThemedText>Edit</ThemedText>
+          <ThemedText type="subtitle">{"here: " + counter}</ThemedText>
+          <Button onPress={handleButtonPress} title="Press Me" />
         </ThemedView>
       </ThemedView>
     </SafeAreaView>
