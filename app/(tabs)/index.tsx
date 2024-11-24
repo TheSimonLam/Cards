@@ -3,7 +3,6 @@ import { StyleSheet, Button } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants/Colors";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import { increment, selectUserValue } from "../features/user/userSlice";
 
@@ -17,7 +16,7 @@ export default function HomeScreen() {
   };
 
   return (
-    <SafeAreaView>
+    <>
       <ThemedView
         lightColor={Colors.light.background}
         darkColor={Colors.dark.background}
@@ -30,7 +29,7 @@ export default function HomeScreen() {
           <Button onPress={handleButtonPress} title="Press Me" />
         </ThemedView>
       </ThemedView>
-    </SafeAreaView>
+    </>
   );
 }
 

@@ -2,18 +2,17 @@ import { StyleSheet } from "react-native";
 
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function FriendsScreen() {
   return (
-    <SafeAreaView>
+    <>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Friends</ThemedText>
       </ThemedView>
       <ThemedText>
         This app includes example code to help you get started.
       </ThemedText>
-    </SafeAreaView>
+    </>
   );
 }
 
