@@ -1,7 +1,9 @@
 export const decks = {
   "1c8-48c-6c4-c854cc": {
     ownerUserId: "Ninjaroni",
-    deckName: "Best Deck Ever!",
+    deckName: "Unorganized",
+    limit: 0,
+    isPlayerMadeDeck: false,
     cards: [
       { cardId: "41d-c61-c36-6gie10", dateObtained: "1732372533" },
       { cardId: "41d-c61-c36-6gie10", dateObtained: "1732372589" },
@@ -9,7 +11,9 @@ export const decks = {
   },
   "vc7-3c7-753-c7531r": {
     ownerUserId: "Uteki",
-    deckName: "Best Deck Ever!",
+    deckName: "Unorganized",
+    limit: 0,
+    isPlayerMadeDeck: false,
     cards: [
       { cardId: "41d-c61-c36-6gie10", dateObtained: "1732372522" },
       { cardId: "41d-c61-c36-6gie12", dateObtained: "1732372526" },
@@ -17,7 +21,9 @@ export const decks = {
   },
   "c73-c75-135-75v2yx": {
     ownerUserId: "Uteki",
-    deckName: "Best Deck Ever!",
+    deckName: "My fire deck",
+    limit: 30,
+    isPlayerMadeDeck: true,
     cards: [
       { cardId: "41d-c61-c36-6gie10", dateObtained: "1732372511" },
       { cardId: "41d-c61-c36-6gie12", dateObtained: "1732372545" },

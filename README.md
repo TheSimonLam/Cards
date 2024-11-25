@@ -27,5 +27,9 @@ Card Rarity
 
 Note:
 
-- Maybe need a card opening server to securely randomise the opening of cards, and read/update the cards and decks collection database
+- Maybe need a card opening server to securely randomize the opening of cards, and read/update the cards and decks collection database
 - On init of the app, check to see if the downloaded cards (in local storage) version is out of date. If it is, make a call to download all of the cards and store them, along with the new version number, in local storage.
+
+Database notes:
+
+- Users will have an "Unorganized" deck where all packs will go. There is no card limit in this one, and the player cannot use it to play games. Players must make a custom deck in order to play a game with it.

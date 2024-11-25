@@ -4,7 +4,7 @@ export const cards = {
     description: "This is the worlds most evil cow",
     rarity: 0,
     numInCirculation: 241,
-    maxAllowedInCirculation: 5000,
+    maxAllowedInCirculation: 0,
     attack: 20,
     defense: 50,
   },
