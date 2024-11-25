@@ -4,11 +4,11 @@
  */
 
 // Primary colors
-const darkOrange = "#fb8500";
-const lightOrange = "#ffb703";
-const lightestBlue = "#8ecae6";
-const lighterBlue = "#219ebc";
-const darkBlue = "#023047";
+const darkBlue = "#003049";
+const red = "#d62828";
+const orange = "#f77f00";
+const yellow = "#fcbf49";
+const paleYellow = "#eae2b7";
 
 // Dark/Light mode colors
 const tintColorLight = "#fff";
@@ -22,8 +22,8 @@ export const Colors = {
     icon: "#687076",
     tabIconDefault: "#fff",
     tabIconSelected: tintColorLight,
-    headerBackgroundColor: lightOrange,
-    footerBackgroundColor: lightOrange,
+    headerBackgroundColor: red,
+    footerBackgroundColor: red,
   },
   dark: {
     text: "#ECEDEE",
@@ -32,7 +32,7 @@ export const Colors = {
     icon: "#9BA1A6",
     tabIconDefault: "#fff",
     tabIconSelected: tintColorDark,
-    headerBackgroundColor: lightOrange,
-    footerBackgroundColor: lightOrange,
+    headerBackgroundColor: red,
+    footerBackgroundColor: red,
   },
 };
