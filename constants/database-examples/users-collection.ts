@@ -1,6 +1,8 @@
 export const users = {
   Ninjaroni: {
     profilePic: "123-abc-def", // This is a pre-defined image users can select. A bit like in LoL. They can unlock profile pics as they go
+    backgroundPic: "123-abc-def", // This is a pre-defined image users can select. A bit like in LoL. They can unlock background pics as they go
+    tagLine: "You cant defeat me",
     balance: "261", // Money
     decks: [
       {

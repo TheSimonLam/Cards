@@ -14,7 +14,16 @@ const paleYellow = "#eae2b7";
 const tintColorLight = "#fff";
 const tintColorDark = "#fff";
 
+// Regular
+const white = "#fff";
+
 export const Colors = {
+  darkBlue,
+  red,
+  orange,
+  yellow,
+  paleYellow,
+  white,
   light: {
     text: "#11181C",
     background: "#fff",

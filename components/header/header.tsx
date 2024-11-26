@@ -1,5 +1,4 @@
 import { Colors } from "@/constants/Colors";
-import { useThemeColor } from "@/hooks/useThemeColor";
 import { StyleSheet, useColorScheme, View } from "react-native";
 
 export const Header = () => {
@@ -19,6 +18,6 @@ export const Header = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 100,
+    height: 60,
   },
 });
