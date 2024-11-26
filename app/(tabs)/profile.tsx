@@ -40,11 +40,12 @@ export default function ProfileScreen() {
               My Decks
             </ThemedText>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              <DeckButton></DeckButton>
-              <DeckButton></DeckButton>
-              <DeckButton></DeckButton>
-              <DeckButton></DeckButton>
-              <DeckButton></DeckButton>
+              <DeckButton title='Unorganized'></DeckButton>
+              <DeckButton title='Fire'></DeckButton>
+              <DeckButton title='Electric'></DeckButton>
+              <DeckButton title='Bad deck'></DeckButton>
+              <DeckButton title='Unbeatable'></DeckButton>
+              <DeckButton title='New Deck'></DeckButton>
             </ScrollView>
           </ThemedView>
         </ThemedView>
