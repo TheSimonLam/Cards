@@ -37,7 +37,7 @@ export default function ProfileScreen() {
 
           <ThemedView style={styles.decksContainer}>
             <ThemedText style={styles.decksSubtitle} type="subtitle">
-              Decks
+              My Decks
             </ThemedText>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <DeckButton></DeckButton>
