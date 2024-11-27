@@ -29,8 +29,6 @@ export default function HomeScreen() {
     </ThemedScrollView>
   );
 }
-    console.log("🚀 ~ HomeScreen ~ increment:", increment)
-    console.log("🚀 ~ HomeScreen ~ increment:", increment)
 
 const styles = StyleSheet.create({
   titleContainer: {

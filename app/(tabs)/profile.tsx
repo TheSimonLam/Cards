@@ -11,6 +11,7 @@ import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants/Colors";
 import { Spacing } from "@/constants/Spacing";
 import { DeckButton } from "@/components/DeckButton";
+import { Button } from "@/components/Button";
 
 export default function ProfileScreen() {
   const colorScheme = useColorScheme();
@@ -40,14 +41,16 @@ export default function ProfileScreen() {
               My Decks
             </ThemedText>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              <DeckButton title='Unorganized'></DeckButton>
-              <DeckButton title='Fire'></DeckButton>
-              <DeckButton title='Electric'></DeckButton>
-              <DeckButton title='Bad deck'></DeckButton>
-              <DeckButton title='Unbeatable'></DeckButton>
-              <DeckButton title='New Deck'></DeckButton>
+              <DeckButton title="Unorganized"></DeckButton>
+              <DeckButton title="Fire"></DeckButton>
+              <DeckButton title="Electric"></DeckButton>
+              <DeckButton title="Bad deck"></DeckButton>
+              <DeckButton title="Unbeatable"></DeckButton>
+              <DeckButton title="New Deck"></DeckButton>
             </ScrollView>
           </ThemedView>
+
+          <Button onPress={() => {}} text="" variant="solid"></Button>
         </ThemedView>
       </ThemedView>
     </>

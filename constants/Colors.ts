@@ -16,6 +16,8 @@ const tintColorDark = "#fff";
 
 // Regular
 const white = "#fff";
+const lightGrey = "#efefef";
+const darkGrey = "#767676";
 
 export const Colors = {
   darkBlue,
@@ -24,6 +26,8 @@ export const Colors = {
   yellow,
   paleYellow,
   white,
+  lightGrey,
+  darkGrey,
   light: {
     text: "#11181C",
     background: "#fff",
