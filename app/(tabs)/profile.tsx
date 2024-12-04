@@ -36,10 +36,11 @@ export default function ProfileScreen() {
             <ThemedText>"Ha, you can't defeat me!"</ThemedText>
           </ThemedView>
 
+          <ThemedText style={styles.decksSubtitle} type="subtitle">
+            My Decks
+          </ThemedText>
+
           <ThemedView style={styles.decksContainer}>
-            <ThemedText style={styles.decksSubtitle} type="subtitle">
-              My Decks
-            </ThemedText>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <DeckButton title="Unorganized"></DeckButton>
               <DeckButton title="Fire"></DeckButton>
@@ -50,7 +51,7 @@ export default function ProfileScreen() {
             </ScrollView>
           </ThemedView>
 
-          <Button onPress={() => {}} text="" variant="solid"></Button>
+          <Button onPress={() => {}} text="Press me" variant="solid"></Button>
         </ThemedView>
       </ThemedView>
     </>
@@ -95,5 +96,12 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.md,
   },
   decksSubtitle: { marginBottom: Spacing.sm },
-  decksContainer: { marginBottom: Spacing.sm },
+  decksContainer: {
+    paddingTop: Spacing.md,
+    paddingBottom: Spacing.md,
+    marginBottom: Spacing.sm,
+    marginLeft: -Spacing.lg,
+    marginRight: -Spacing.lg,
+    backgroundColor: Colors.lightGrey,
+  },
 });
