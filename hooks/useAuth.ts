@@ -1,8 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import {
-  setAuthIsLoading,
+  setIsAuthLoading,
   setAuthSession,
 } from "@/app/features/global/globalSlice";
 import { getStorageItem, setStorageItem } from "./setStorageItem";
@@ -10,28 +9,26 @@ import { getStorageItem, setStorageItem } from "./setStorageItem";
 export const useAuth = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    // Get a previously stored auth session
-    (async () => {
-      const localStorageAuthSession = await getStorageItem("auth-session");
-      dispatch(setAuthSession(localStorageAuthSession));
-    })();
-  }, []);
+  const retrieveAuthSessionFromStorage = async () => {
+    const localStorageAuthSession = await getStorageItem("auth-session");
+    dispatch(setAuthSession(localStorageAuthSession));
+    return localStorageAuthSession;
+  };
 
   const signIn = async () => {
-    dispatch(setAuthIsLoading(true));
+    dispatch(setIsAuthLoading(true));
     const authSession = "yolo"; // TODO: This is where we'd fetch a new token
     await setStorageItem("auth-session", authSession);
     dispatch(setAuthSession(authSession));
-    dispatch(setAuthIsLoading(false));
+    dispatch(setIsAuthLoading(false));
   };
 
   const signOut = async () => {
-    dispatch(setAuthIsLoading(true));
+    dispatch(setIsAuthLoading(true));
     await setStorageItem("auth-session", null);
     dispatch(setAuthSession(null));
-    dispatch(setAuthIsLoading(false));
+    dispatch(setIsAuthLoading(false));
   };
 
-  return { signIn, signOut };
+  return { retrieveAuthSessionFromStorage, signIn, signOut };
 };
