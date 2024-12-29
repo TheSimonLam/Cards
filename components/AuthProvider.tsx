@@ -6,7 +6,7 @@ export const AuthProvider = ({ children }: any) => {
 
   useEffect(() => {
     (async () => {
-      retrieveAuthSessionFromStorage();
+      await retrieveAuthSessionFromStorage();
     })();
   }, []);
 

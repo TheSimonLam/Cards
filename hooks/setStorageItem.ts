@@ -1,7 +1,7 @@
 import * as SecureStore from "expo-secure-store";
 
 export const getStorageItem = async (key: string) => {
-  await SecureStore.getItemAsync(key);
+  return await SecureStore.getItemAsync(key);
 };
 
 export const setStorageItem = async (key: string, value: string | null) => {

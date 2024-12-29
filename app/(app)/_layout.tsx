@@ -6,10 +6,23 @@ import {
   selectIsAuthLoading,
 } from "../features/global/globalSlice";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function AppLayout() {
-  const authSession = useSelector(selectAuthSession);
+  const { retrieveAuthSessionFromStorage } = useAuth();
   const isAuthLoading = useSelector(selectIsAuthLoading);
+
+  useEffect(() => {
+    (async () => {
+      const authSession = await retrieveAuthSessionFromStorage();
+      console.log(authSession);
+
+      if (!!authSession) {
+        return <Redirect href={{ pathname: "/(tabs)/" }} />;
+      }
+    })();
+  }, []);
 
   // You can keep the splash screen open, or render a loading screen like we do here.
   if (isAuthLoading) {
@@ -18,7 +31,7 @@ export default function AppLayout() {
 
   // Only require authentication within the (app) group's layout as users
   // need to be able to access the (auth) group and sign in again.
-  if (!authSession) {
+  if (!isAuthenticated) {
     // On web, static rendering will stop here as the user is not authenticated
     // in the headless Node process that the pages are rendered in.
     return <Redirect href={{ pathname: "/sign-in" }} />;
