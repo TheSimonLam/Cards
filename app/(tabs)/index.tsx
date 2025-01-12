@@ -4,7 +4,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants/Colors";
 import { useDispatch, useSelector } from "react-redux";
-import { increment, selectUserValue } from "../features/user/userSlice";
+import { increment, selectUserValue } from "../../features/user/userSlice";
 import { ThemedScrollView } from "@/components/ThemedScrollView";
 
 export default function HomeScreen() {

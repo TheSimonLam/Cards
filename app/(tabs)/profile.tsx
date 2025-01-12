@@ -5,6 +5,7 @@ import {
   TouchableHighlight,
   useColorScheme,
 } from "react-native";
+import { useClerk, useUser } from "@clerk/clerk-expo";
 
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
@@ -12,9 +13,23 @@ import { Colors } from "@/constants/Colors";
 import { Spacing } from "@/constants/Spacing";
 import { DeckButton } from "@/components/DeckButton";
 import { Button } from "@/components/Button";
+import { useRouter } from "expo-router";
 
 export default function ProfileScreen() {
   const colorScheme = useColorScheme();
+  const { user } = useUser();
+  const { signOut } = useClerk();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      // Redirect to your desired page
+      router.replace("/login");
+    } catch (err) {
+      console.error(JSON.stringify(err, null, 2));
+    }
+  };
 
   return (
     <>
@@ -51,7 +66,15 @@ export default function ProfileScreen() {
             </ScrollView>
           </ThemedView>
 
-          <Button onPress={() => {}} text="Press me" variant="solid"></Button>
+          <Button
+            onPress={handleSignOut}
+            text="Sign Out"
+            variant="solid"
+          ></Button>
+
+          <ThemedText>
+            Welcome, {user?.emailAddresses[0].emailAddress} 🎉
+          </ThemedText>
         </ThemedView>
       </ThemedView>
     </>
