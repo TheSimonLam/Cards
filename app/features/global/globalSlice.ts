@@ -2,40 +2,30 @@ import { createSelector, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface GlobalState {
-  authSession: string | null;
-  isAuthLoading: boolean;
+  someVal: boolean;
 }
 
 const initialState: GlobalState = {
-  authSession: null,
-  isAuthLoading: false,
+  someVal: false,
 };
 
 export const globalSlice = createSlice({
   name: "global",
   initialState,
   reducers: {
-    setIsAuthLoading: (state, action: PayloadAction<boolean>) => {
-      state.isAuthLoading = action.payload;
-    },
-    setAuthSession: (state, action) => {
-      state.authSession = action.payload;
+    setSomeVal: (state, action: PayloadAction<boolean>) => {
+      state.someVal = action.payload;
     },
   },
 });
 
-export const { setIsAuthLoading, setAuthSession } = globalSlice.actions;
+export const { setSomeVal } = globalSlice.actions;
 
 export default globalSlice.reducer;
 
 export const selectGlobal = (state: any) => state.global;
 
-export const selectAuthSession = createSelector(
+export const selectSomeVal = createSelector(
   selectGlobal,
-  (global) => global.authSession
-);
-
-export const selectIsAuthLoading = createSelector(
-  selectGlobal,
-  (global) => global.isAuthLoading
+  (global) => global.someVal
 );
