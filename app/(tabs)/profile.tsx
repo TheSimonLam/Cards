@@ -19,7 +19,7 @@ import { useState } from "react";
 
 export default function ProfileScreen() {
   const colorScheme = useColorScheme();
-  const { user } = useUser();
+  const { user } = useUser() || {};
   const { signOut } = useClerk();
   const router = useRouter();
   const [firstName, setFirstName] = useState(user.firstName);
@@ -37,7 +37,7 @@ export default function ProfileScreen() {
 
   const onSaveUser = async () => {
     try {
-      const result = await user.update({
+      const result = await user?.update({
         firstName: firstName,
         lastName: lastName,
       });

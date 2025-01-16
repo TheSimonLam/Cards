@@ -37,3 +37,9 @@ Database notes:
 How to create new Supabase Edge Function:
 `npx supabase functions new my-function`
 (Dont forget to deploy it after)
+
+How to update Edge function with changes:
+`supabase functions deploy helloworld`
+
+How to set secrets/.env file:
+`npx supabase secrets set --env-file ./supabase/.env`
