@@ -6,8 +6,11 @@ import { Colors } from "@/constants/Colors";
 import { useDispatch, useSelector } from "react-redux";
 import { increment, selectUserValue } from "../../features/user/userSlice";
 import { ThemedScrollView } from "@/components/ThemedScrollView";
+import { useGetInfo } from "@/hooks/useGetInfo";
+import { useEffect } from "react";
 
 export default function HomeScreen() {
+  const { requestGetInfo } = useGetInfo();
   // const dispatch = useDispatch();
 
   // const counter = useSelector(selectUserValue);
@@ -15,6 +18,17 @@ export default function HomeScreen() {
   // const handleButtonPress = () => {
   //   dispatch(increment());
   // };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await requestGetInfo();
+        console.log(res);
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  }, []);
 
   return (
     <ThemedScrollView>

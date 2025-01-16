@@ -33,3 +33,7 @@ Note:
 Database notes:
 
 - Users will have an "Unorganized" deck where all packs will go. There is no card limit in this one, and the player cannot use it to play games. Players must make a custom deck in order to play a game with it.
+
+How to create new Supabase Edge Function:
+`npx supabase functions new my-function`
+(Dont forget to deploy it after)
