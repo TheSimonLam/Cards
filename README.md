@@ -43,3 +43,7 @@ How to update Edge function with changes:
 
 How to set secrets/.env file:
 `npx supabase secrets set --env-file ./supabase/.env`
+
+Clerk takes a (secret) JWT Signing Key from Supabase that's used to generate a JWT to plug into request Authorization header. Edge Functions have JWT protection enabled and will automatically authenticate the call.
+
+RLS is needed so users can only edit their own information
