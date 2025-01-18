@@ -1,4 +1,4 @@
-export const cards = {
+export const packs = {
   "351-c53-163-r3153e": {
     name: "Everfrost",
     description: "These packs are amazing. Find out more by opening one",
