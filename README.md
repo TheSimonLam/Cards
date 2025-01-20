@@ -47,3 +47,6 @@ How to set secrets/.env file:
 Clerk takes a (secret) JWT Signing Key from Supabase that's used to generate a JWT to plug into request Authorization header. Edge Functions have JWT protection enabled and will automatically authenticate the call.
 
 RLS is needed so users can only edit their own information
+
+Data design:
+https://dbdiagram.io/d/Cards-678e73846b7fa355c3762f2d
