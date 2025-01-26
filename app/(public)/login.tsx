@@ -16,7 +16,7 @@ import Spinner from "react-native-loading-spinner-overlay";
 const Login = () => {
   const { signIn, setActive, isLoaded } = useSignIn();
 
-  const [emailAddress, setEmailAddress] = useState("");
+  const [emailAddressOrUsername, setEmailAddressOrUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -27,7 +27,7 @@ const Login = () => {
     setLoading(true);
     try {
       const completeSignIn = await signIn.create({
-        identifier: emailAddress,
+        identifier: emailAddressOrUsername,
         password,
       });
 
@@ -46,9 +46,9 @@ const Login = () => {
 
       <TextInput
         autoCapitalize="none"
-        placeholder="Email"
-        value={emailAddress}
-        onChangeText={setEmailAddress}
+        placeholder="Username or Email"
+        value={emailAddressOrUsername}
+        onChangeText={setEmailAddressOrUsername}
         style={styles.inputField}
       />
       <TextInput

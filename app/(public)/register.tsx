@@ -8,6 +8,7 @@ import { Colors } from '@/constants/Colors';
 const Register = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
 
+  const [username, setUsername] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
   const [pendingVerification, setPendingVerification] = useState(false);
@@ -25,6 +26,7 @@ const Register = () => {
       // Create the user on Clerk
       await signUp.create({
         emailAddress,
+        username,
         password,
       });
 
@@ -68,6 +70,7 @@ const Register = () => {
       {!pendingVerification && (
         <>
           <TextInput autoCapitalize="none" placeholder="Email" value={emailAddress} onChangeText={setEmailAddress} style={styles.inputField} />
+          <TextInput autoCapitalize="none" placeholder="Username" value={username} onChangeText={setUsername} style={styles.inputField} />
           <TextInput placeholder="password" value={password} onChangeText={setPassword} secureTextEntry style={styles.inputField} />
 
           <Button onPress={onSignUpPress} title="Sign up" color={Colors.red}></Button>

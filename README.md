@@ -39,14 +39,18 @@ How to create new Supabase Edge Function:
 (Dont forget to deploy it after)
 
 How to update Edge function with changes:
-`supabase functions deploy helloworld`
+`npx supabase functions deploy my-function`
 
 How to set secrets/.env file:
 `npx supabase secrets set --env-file ./supabase/.env`
 
 Clerk takes a (secret) JWT Signing Key from Supabase that's used to generate a JWT to plug into request Authorization header. Edge Functions have JWT protection enabled and will automatically authenticate the call.
 
+Clerk webhooks need an Authorization header using the public Supabase JWT
+
 RLS is needed so users can only edit their own information
 
 Data design:
 https://dbdiagram.io/d/Cards-678e73846b7fa355c3762f2d
+
+Remember to test all inputs for error handling.
