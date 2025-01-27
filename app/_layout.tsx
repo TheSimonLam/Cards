@@ -12,7 +12,7 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
-import { store } from "../store";
+import { store } from "../features/store";
 import { Provider } from "react-redux";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
