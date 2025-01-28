@@ -54,3 +54,5 @@ Data design:
 https://dbdiagram.io/d/Cards-678e73846b7fa355c3762f2d
 
 Remember to test all inputs for error handling.
+
+Don't let users change username
