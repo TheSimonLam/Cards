@@ -22,8 +22,6 @@ export default function ProfileScreen() {
   const { user } = useUser() || {};
   const { signOut } = useClerk();
   const router = useRouter();
-  const [firstName, setFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
 
   const handleSignOut = async () => {
     try {
@@ -32,18 +30,6 @@ export default function ProfileScreen() {
       router.replace("/login");
     } catch (err) {
       console.error(JSON.stringify(err, null, 2));
-    }
-  };
-
-  const onSaveUser = async () => {
-    try {
-      const result = await user?.update({
-        firstName: firstName,
-        lastName: lastName,
-      });
-      console.log(result);
-    } catch (e) {
-      console.log("error");
     }
   };
 
@@ -92,25 +78,6 @@ export default function ProfileScreen() {
             Welcome, {user?.emailAddresses[0].emailAddress} 🎉
           </ThemedText>
 
-          <ThemedText style={{ textAlign: "center" }}>
-            Good morning {user.firstName} {user.lastName}!
-          </ThemedText>
-
-          <TextInput
-            placeholder="First Name"
-            value={firstName}
-            onChangeText={setFirstName}
-          />
-          <TextInput
-            placeholder="Last Name"
-            value={lastName}
-            onChangeText={setLastName}
-          />
-          <Button
-            onPress={onSaveUser}
-            text="Update account"
-            variant="solid"
-          ></Button>
         </ThemedView>
       </ThemedView>
     </>
