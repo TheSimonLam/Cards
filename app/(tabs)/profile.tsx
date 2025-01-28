@@ -19,7 +19,7 @@ import { useState } from "react";
 
 export default function ProfileScreen() {
   const colorScheme = useColorScheme();
-  const { user } = useUser() || {};
+  const { user } = useUser() || { user: {} };
   const { signOut } = useClerk();
   const router = useRouter();
 

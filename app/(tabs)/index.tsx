@@ -6,11 +6,13 @@ import { Colors } from "@/constants/Colors";
 import { useDispatch, useSelector } from "react-redux";
 import { increment, selectUserValue } from "../../features/user/userSlice";
 import { ThemedScrollView } from "@/components/ThemedScrollView";
-import { useGetInfo } from "@/hooks/useGetInfo";
+import { useGetUser } from "@/hooks/useUser";
 import { useEffect } from "react";
+import { useUser } from "@clerk/clerk-expo";
 
 export default function HomeScreen() {
-  const { requestGetInfo } = useGetInfo();
+  const { requestGetUser } = useGetUser();
+  const { user } = useUser() || { user: {} };
   // const dispatch = useDispatch();
 
   // const counter = useSelector(selectUserValue);
@@ -22,7 +24,8 @@ export default function HomeScreen() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await requestGetInfo();
+        const res = await requestGetUser(user?.username);
+        // Save this personal user info in redux state
         console.log(res);
       } catch (err) {
         console.error(err);

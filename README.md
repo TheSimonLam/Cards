@@ -56,3 +56,7 @@ https://dbdiagram.io/d/Cards-678e73846b7fa355c3762f2d
 Remember to test all inputs for error handling.
 
 Don't let users change username
+
+TODO:
+- If a user is requesting a user other than themselves, filter out private properties
+- Secure tables with RLS incase somebody gets their hands on the SUPABASE_ANON_KEY

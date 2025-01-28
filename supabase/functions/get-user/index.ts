@@ -5,18 +5,21 @@ const supUrl = Deno.env.get ("PUBLIC_SUPABASE_URL") as string;
 const supKey = Deno.env.get ("PUBLIC_ANON_KEY") as string;
 const supabase = createClient(supUrl, supKey);
 
+// TODO: Protect this so that if a user is requesting their own info, show it all.
+// Otherwise, filter it to show only public things
+
 Deno.serve(async (req) => {
-  let { data: users, error } = await supabase
+  const { username } = await req.json()
+
+  const { data, error } = await supabase
   .from('users')
   .select('*')
-  
-  const { name } = await req.json()
-  const data = {
-    message: `Hello ${name}!`,
-  }
+  .eq('username', username)
+
+  console.log(error);
 
   return new Response(
-    JSON.stringify({data, users}),
+    JSON.stringify({data}),
     { headers: { "Content-Type": "application/json" } },
   )
 })
