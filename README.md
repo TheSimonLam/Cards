@@ -60,4 +60,3 @@ Don't let users change username
 TODO:
 - If a user is requesting a user other than themselves, filter out private properties
 - Secure tables with RLS incase somebody gets their hands on the SUPABASE_ANON_KEY
-- Install UniStyles 3
