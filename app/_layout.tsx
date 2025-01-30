@@ -2,20 +2,13 @@ import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 import { Slot, useRouter, useSegments } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
 import { store } from "../features/store";
 import { Provider } from "react-redux";
 
-import { useColorScheme } from "@/hooks/useColorScheme";
 import { Header } from "@/components/header/header";
 
 const CLERK_PUBLISHABLE_KEY =
@@ -62,7 +55,6 @@ const tokenCache = {
 };
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
@@ -79,15 +71,13 @@ export default function RootLayout() {
 
   return (
     <Provider store={store}>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Header />
-        <ClerkProvider
-          publishableKey={CLERK_PUBLISHABLE_KEY}
-          tokenCache={tokenCache}
-        >
-          <InitialLayout />
-        </ClerkProvider>
-      </ThemeProvider>
+      <Header />
+      <ClerkProvider
+        publishableKey={CLERK_PUBLISHABLE_KEY}
+        tokenCache={tokenCache}
+      >
+        <InitialLayout />
+      </ClerkProvider>
     </Provider>
   );
 }

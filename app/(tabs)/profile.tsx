@@ -2,23 +2,20 @@ import {
   Image,
   ScrollView,
   StyleSheet,
+  Text,
   TextInput,
   TouchableHighlight,
-  useColorScheme,
+  View,
 } from "react-native";
 import { useClerk, useUser } from "@clerk/clerk-expo";
 
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants/Colors";
 import { Spacing } from "@/constants/Spacing";
 import { DeckButton } from "@/components/DeckButton";
 import { Button } from "@/components/Button";
 import { useRouter } from "expo-router";
-import { useState } from "react";
 
 export default function ProfileScreen() {
-  const colorScheme = useColorScheme();
   const { user } = useUser() || { user: {} };
   const { signOut } = useClerk();
   const router = useRouter();
@@ -35,9 +32,9 @@ export default function ProfileScreen() {
 
   return (
     <>
-      <ThemedView style={styles.profileBackgroundContainer}>
-        <ThemedView style={styles.profileBodyContainer}>
-          <ThemedView style={styles.profilePictureContainer}>
+      <View style={styles.profileBackgroundContainer}>
+        <View style={styles.profileBodyContainer}>
+          <View style={styles.profilePictureContainer}>
             <TouchableHighlight style={[styles.profileImgContainer]}>
               <Image
                 source={{
@@ -46,18 +43,18 @@ export default function ProfileScreen() {
                 style={styles.profileImg}
               />
             </TouchableHighlight>
-          </ThemedView>
+          </View>
 
-          <ThemedView style={styles.usernameContainer}>
-            <ThemedText type="title">GamerGuy01</ThemedText>
-            <ThemedText>"Ha, you can't defeat me!"</ThemedText>
-          </ThemedView>
+          <View style={styles.usernameContainer}>
+            <Text>GamerGuy01</Text>
+            <Text>"Ha, you can't defeat me!"</Text>
+          </View>
 
-          <ThemedText style={styles.decksSubtitle} type="subtitle">
+          <Text style={styles.decksSubtitle}>
             My Decks
-          </ThemedText>
+          </Text>
 
-          <ThemedView style={styles.decksContainer}>
+          <View style={styles.decksContainer}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <DeckButton title="Unorganized"></DeckButton>
               <DeckButton title="Fire"></DeckButton>
@@ -66,7 +63,7 @@ export default function ProfileScreen() {
               <DeckButton title="Unbeatable"></DeckButton>
               <DeckButton title="New Deck"></DeckButton>
             </ScrollView>
-          </ThemedView>
+          </View>
 
           <Button
             onPress={handleSignOut}
@@ -74,12 +71,11 @@ export default function ProfileScreen() {
             variant="solid"
           ></Button>
 
-          <ThemedText>
+          <Text>
             Welcome, {user?.emailAddresses[0].emailAddress} 🎉
-          </ThemedText>
-
-        </ThemedView>
-      </ThemedView>
+          </Text>
+        </View>
+      </View>
     </>
   );
 }

@@ -3,19 +3,16 @@ import { Spacing } from "@/constants/Spacing";
 import {
   Image,
   StyleSheet,
+  Text,
   TouchableHighlight,
-  useColorScheme,
   View,
 } from "react-native";
-import { ThemedText } from "./ThemedText";
 
 export type DeckProps = {
   title: string;
 };
 
 export const DeckButton = ({ title }: DeckProps) => {
-  const colorScheme = useColorScheme();
-
   return (
     <TouchableHighlight style={styles.container}>
       <>
@@ -30,7 +27,7 @@ export const DeckButton = ({ title }: DeckProps) => {
           }}
           style={styles.deckImg}
         />
-        <ThemedText type="default">{title}</ThemedText>
+        <Text>{title}</Text>
       </>
     </TouchableHighlight>
   );

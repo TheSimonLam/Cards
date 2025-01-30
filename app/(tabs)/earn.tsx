@@ -1,17 +1,9 @@
-import { StyleSheet } from "react-native";
-
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
+import { StyleSheet, Text } from "react-native";
 
 export default function EarnScreen() {
   return (
     <>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Earn</ThemedText>
-      </ThemedView>
-      <ThemedText>
-        This app includes example code to help you get started.
-      </ThemedText>
+      <Text>Earn</Text>
     </>
   );
 }

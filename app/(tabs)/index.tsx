@@ -1,11 +1,8 @@
-import { StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
 import { Colors } from "@/constants/Colors";
 import { useDispatch, useSelector } from "react-redux";
 import { increment, selectUserValue } from "../../features/user/userSlice";
-import { ThemedScrollView } from "@/components/ThemedScrollView";
 import { useGetUser } from "@/hooks/useUser";
 import { useEffect } from "react";
 import { useUser } from "@clerk/clerk-expo";
@@ -34,16 +31,13 @@ export default function HomeScreen() {
   }, []);
 
   return (
-    <ThemedScrollView>
-      <ThemedView
-        lightColor={Colors.light.background}
-        darkColor={Colors.dark.background}
-      >
-        <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">What's New</ThemedText>
-        </ThemedView>
-      </ThemedView>
-    </ThemedScrollView>
+    <ScrollView>
+      <View>
+        <View style={styles.titleContainer}>
+          <Text>What's New</Text>
+        </View>
+      </View>
+    </ScrollView>
   );
 }
 

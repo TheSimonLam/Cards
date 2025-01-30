@@ -3,19 +3,16 @@ import React from "react";
 
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
-import { useColorScheme } from "@/hooks/useColorScheme";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
         tabBarInactiveTintColor: '#fff',
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: Colors[ "light"].tint,
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarStyle: { backgroundColor: Colors[colorScheme ?? "light"].footerBackgroundColor },
+        tabBarStyle: { backgroundColor: Colors["light"].footerBackgroundColor },
       }}
     >
       <Tabs.Screen
