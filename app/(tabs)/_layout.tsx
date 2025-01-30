@@ -8,8 +8,8 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarInactiveTintColor: '#fff',
-        tabBarActiveTintColor: Colors[ "light"].tint,
+        tabBarInactiveTintColor: "#fff",
+        tabBarActiveTintColor: Colors["light"].tint,
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: { backgroundColor: Colors["light"].footerBackgroundColor },
@@ -21,19 +21,19 @@ export default function TabLayout() {
           title: "Home",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
-              name={focused ? "home" : "home-outline"}
+              name={focused ? "earth" : "earth-outline"}
               color={color}
             />
           ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="buy"
         options={{
-          title: "Explore",
+          title: "Buy",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
-              name={focused ? "earth" : "earth-outline"}
+              name={focused ? "cart" : "cart-outline"}
               color={color}
             />
           ),

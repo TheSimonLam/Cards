@@ -38,7 +38,7 @@ export default function HomeScreen() {
       <ScrollView>
         <View>
           <View style={styles.titleContainer}>
-            <Text>What's New</Text>
+            <Text>Explore</Text>
           </View>
         </View>
       </ScrollView>
