@@ -10,8 +10,6 @@ import { store } from "../features/store";
 import { Provider } from "react-redux";
 import "../styling/unistyles";
 
-import { Header } from "@/components/header/header";
-
 const CLERK_PUBLISHABLE_KEY =
   "pk_test_ZGVjZW50LXdyZW4tNjkuY2xlcmsuYWNjb3VudHMuZGV2JA";
 
@@ -72,7 +70,6 @@ export default function RootLayout() {
 
   return (
     <Provider store={store}>
-      <Header />
       <ClerkProvider
         publishableKey={CLERK_PUBLISHABLE_KEY}
         tokenCache={tokenCache}

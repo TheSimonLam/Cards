@@ -1,19 +1,10 @@
 import { Text } from "react-native";
-import { createStyleSheet, useStyles } from "react-native-unistyles";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function EarnScreen() {
-  const { styles } = useStyles(stylesheet);
-
   return (
-    <>
+    <SafeAreaView style={{ flex: 1 }}>
       <Text>Earn</Text>
-    </>
+    </SafeAreaView>
   );
 }
-
-const stylesheet = createStyleSheet({
-  titleContainer: {
-    flexDirection: "row",
-    gap: 8,
-  },
-});

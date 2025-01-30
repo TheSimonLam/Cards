@@ -1,10 +1,11 @@
-import { Button, TextInput, View, StyleSheet } from "react-native";
+import { Button, TextInput, View } from "react-native";
 import { useSignUp } from "@clerk/clerk-expo";
 import Spinner from "react-native-loading-spinner-overlay";
 import { useState } from "react";
 import { Stack } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Register = () => {
   const { styles } = useStyles(stylesheet);
@@ -66,7 +67,7 @@ const Register = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Stack.Screen options={{ headerBackVisible: !pendingVerification }} />
       <Spinner visible={loading} />
 
@@ -119,7 +120,7 @@ const Register = () => {
           ></Button>
         </>
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 

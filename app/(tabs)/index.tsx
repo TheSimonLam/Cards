@@ -6,6 +6,7 @@ import { useGetUser } from "@/hooks/useUser";
 import { useEffect } from "react";
 import { useUser } from "@clerk/clerk-expo";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   const { styles } = useStyles(stylesheet);
@@ -33,13 +34,15 @@ export default function HomeScreen() {
   }, []);
 
   return (
-    <ScrollView>
-      <View>
-        <View style={styles.titleContainer}>
-          <Text>What's New</Text>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView>
+        <View>
+          <View style={styles.titleContainer}>
+            <Text>What's New</Text>
+          </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 

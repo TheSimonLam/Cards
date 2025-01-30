@@ -4,6 +4,7 @@ import { Stack } from "expo-router";
 import { useSignIn } from "@clerk/clerk-expo";
 import { Colors } from "@/constants/Colors";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const PwReset = () => {
   const { styles } = useStyles(stylesheet);
@@ -45,7 +46,7 @@ const PwReset = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Stack.Screen options={{ headerBackVisible: !successfulCreation }} />
 
       {!successfulCreation && (
@@ -90,7 +91,7 @@ const PwReset = () => {
           ></Button>
         </>
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 

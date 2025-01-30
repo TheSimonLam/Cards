@@ -11,6 +11,7 @@ import {
   Alert,
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 
 const Login = () => {
@@ -43,7 +44,7 @@ const Login = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Spinner visible={loading} />
 
       <TextInput
@@ -73,7 +74,7 @@ const Login = () => {
           <Text>Create Account</Text>
         </Pressable>
       </Link>
-    </View>
+    </SafeAreaView>
   );
 };
 

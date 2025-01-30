@@ -12,12 +12,13 @@ import { DeckButton } from "@/elements/DeckButton";
 import { Button } from "@/elements/Button";
 import { useRouter } from "expo-router";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ProfileScreen() {
   const { user } = useUser() || { user: {} };
   const { signOut } = useClerk();
   const router = useRouter();
-  const {styles} = useStyles(stylesheet)
+  const { styles } = useStyles(stylesheet);
 
   const handleSignOut = async () => {
     try {
@@ -30,7 +31,7 @@ export default function ProfileScreen() {
   };
 
   return (
-    <>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.profileBackgroundContainer}>
         <View style={styles.profileBodyContainer}>
           <View style={styles.profilePictureContainer}>
@@ -71,7 +72,7 @@ export default function ProfileScreen() {
           <Text>Welcome, {user?.emailAddresses[0].emailAddress} 🎉</Text>
         </View>
       </View>
-    </>
+    </SafeAreaView>
   );
 }
 
