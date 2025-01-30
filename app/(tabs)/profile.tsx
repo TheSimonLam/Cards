@@ -13,9 +13,12 @@ import { Button } from "@/elements/Button";
 import { useRouter } from "expo-router";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { selectUser } from "@/features/user/userSlice";
+import { useSelector } from "react-redux";
 
 export default function ProfileScreen() {
   const { user } = useUser() || { user: {} };
+  const userDetails = useSelector(selectUser);
   const { signOut } = useClerk();
   const router = useRouter();
   const { styles } = useStyles(stylesheet);
@@ -70,6 +73,7 @@ export default function ProfileScreen() {
           ></Button>
 
           <Text>Welcome, {user?.emailAddresses[0].emailAddress} 🎉</Text>
+          <Text>{JSON.stringify(userDetails)}</Text>
         </View>
       </View>
     </SafeAreaView>

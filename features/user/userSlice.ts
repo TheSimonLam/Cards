@@ -1,16 +1,18 @@
 import {
-  createDraftSafeSelector,
   createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { fetchUserByUsername } from "./userThunks";
 
 export interface UserState {
   value: number;
+  user: any
 }
 
 const initialState: UserState = {
   value: 0,
+  user: {}
 };
 
 export const userSlice = createSlice({
@@ -26,6 +28,11 @@ export const userSlice = createSlice({
     incrementByAmount: (state, action: PayloadAction<number>) => {
       state.value += action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchUserByUsername.fulfilled, (state, action) => {
+      state.user = action.payload
+    })
   },
 });
 
