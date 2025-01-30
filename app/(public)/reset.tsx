@@ -1,10 +1,13 @@
-import { View, StyleSheet, TextInput, Button } from "react-native";
+import { View, TextInput, Button } from "react-native";
 import React, { useState } from "react";
 import { Stack } from "expo-router";
 import { useSignIn } from "@clerk/clerk-expo";
 import { Colors } from "@/constants/Colors";
+import { createStyleSheet, useStyles } from "react-native-unistyles";
 
 const PwReset = () => {
+  const { styles } = useStyles(stylesheet);
+
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
   const [code, setCode] = useState("");
@@ -91,7 +94,7 @@ const PwReset = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const stylesheet = createStyleSheet({
   container: {
     flex: 1,
     justifyContent: "center",

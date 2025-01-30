@@ -1,4 +1,4 @@
-import { StyleSheet, Text } from "react-native";
+import { Text } from "react-native";
 
 export default function FollowingScreen() {
   return (
@@ -7,10 +7,3 @@ export default function FollowingScreen() {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
-    gap: 8,
-  },
-});

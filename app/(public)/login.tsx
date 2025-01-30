@@ -4,7 +4,6 @@ import { Link } from "expo-router";
 import React, { useState } from "react";
 import {
   View,
-  StyleSheet,
   TextInput,
   Button,
   Pressable,
@@ -12,8 +11,11 @@ import {
   Alert,
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
+import { createStyleSheet, useStyles } from "react-native-unistyles";
 
 const Login = () => {
+  const { styles } = useStyles(stylesheet);
+
   const { signIn, setActive, isLoaded } = useSignIn();
 
   const [emailAddressOrUsername, setEmailAddressOrUsername] = useState("");
@@ -75,7 +77,7 @@ const Login = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const stylesheet = createStyleSheet({
   container: {
     flex: 1,
     justifyContent: "center",

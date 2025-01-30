@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import { store } from "../features/store";
 import { Provider } from "react-redux";
+import "../styling/unistyles";
 
 import { Header } from "@/components/header/header";
 

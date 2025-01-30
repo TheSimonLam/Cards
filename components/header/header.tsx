@@ -1,12 +1,15 @@
 import { Colors } from "@/constants/Colors";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
+import { createStyleSheet, useStyles } from "react-native-unistyles";
 
 export const Header = () => {
+  const { styles } = useStyles(stylesheet);
+
   return (
     <View
       style={[
         {
-          backgroundColor: Colors["light"].footerBackgroundColor,
+          backgroundColor: Colors.red,
         },
         styles.container,
       ]}
@@ -14,7 +17,7 @@ export const Header = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const stylesheet = createStyleSheet({
   container: {
     height: 60,
   },

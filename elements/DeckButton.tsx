@@ -1,18 +1,18 @@
-import { Colors } from "@/constants/Colors";
-import { Spacing } from "@/constants/Spacing";
 import {
   Image,
-  StyleSheet,
   Text,
   TouchableHighlight,
   View,
 } from "react-native";
+import { createStyleSheet, useStyles } from "react-native-unistyles";
 
 export type DeckProps = {
   title: string;
 };
 
 export const DeckButton = ({ title }: DeckProps) => {
+  const { styles } = useStyles(stylesheet);
+
   return (
     <TouchableHighlight style={styles.container}>
       <>
@@ -33,14 +33,14 @@ export const DeckButton = ({ title }: DeckProps) => {
   );
 };
 
-const styles = StyleSheet.create({
+const stylesheet = createStyleSheet((theme) => ({
   container: {
-    marginLeft: Spacing.sm,
-    marginRight: Spacing.sm,
+    marginLeft: theme.margins.sm,
+    marginRight: theme.margins.sm,
     alignItems: "center",
   },
   deckImg: {
     height: 130,
     width: 96,
   },
-});
+}));

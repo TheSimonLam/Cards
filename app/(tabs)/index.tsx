@@ -1,13 +1,15 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 
-import { Colors } from "@/constants/Colors";
 import { useDispatch, useSelector } from "react-redux";
 import { increment, selectUserValue } from "../../features/user/userSlice";
 import { useGetUser } from "@/hooks/useUser";
 import { useEffect } from "react";
 import { useUser } from "@clerk/clerk-expo";
+import { createStyleSheet, useStyles } from "react-native-unistyles";
 
 export default function HomeScreen() {
+  const { styles } = useStyles(stylesheet);
+
   const { requestGetUser } = useGetUser();
   const { user } = useUser() || { user: {} };
   // const dispatch = useDispatch();
@@ -41,7 +43,7 @@ export default function HomeScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const stylesheet = createStyleSheet({
   titleContainer: {
     flexDirection: "row",
     alignItems: "center",

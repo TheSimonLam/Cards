@@ -1,7 +1,6 @@
 import {
   Image,
   ScrollView,
-  StyleSheet,
   Text,
   TextInput,
   TouchableHighlight,
@@ -9,16 +8,16 @@ import {
 } from "react-native";
 import { useClerk, useUser } from "@clerk/clerk-expo";
 
-import { Colors } from "@/constants/Colors";
-import { Spacing } from "@/constants/Spacing";
-import { DeckButton } from "@/components/DeckButton";
-import { Button } from "@/components/Button";
+import { DeckButton } from "@/elements/DeckButton";
+import { Button } from "@/elements/Button";
 import { useRouter } from "expo-router";
+import { createStyleSheet, useStyles } from "react-native-unistyles";
 
 export default function ProfileScreen() {
   const { user } = useUser() || { user: {} };
   const { signOut } = useClerk();
   const router = useRouter();
+  const {styles} = useStyles(stylesheet)
 
   const handleSignOut = async () => {
     try {
@@ -50,9 +49,7 @@ export default function ProfileScreen() {
             <Text>"Ha, you can't defeat me!"</Text>
           </View>
 
-          <Text style={styles.decksSubtitle}>
-            My Decks
-          </Text>
+          <Text style={styles.decksSubtitle}>My Decks</Text>
 
           <View style={styles.decksContainer}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -71,19 +68,17 @@ export default function ProfileScreen() {
             variant="solid"
           ></Button>
 
-          <Text>
-            Welcome, {user?.emailAddresses[0].emailAddress} 🎉
-          </Text>
+          <Text>Welcome, {user?.emailAddresses[0].emailAddress} 🎉</Text>
         </View>
       </View>
     </>
   );
 }
 
-const styles = StyleSheet.create({
+const stylesheet = createStyleSheet((theme) => ({
   profileBackgroundContainer: {
     flex: 1,
-    backgroundColor: Colors.yellow,
+    backgroundColor: theme.colors.yellow,
     position: "relative",
   },
   profileBodyContainer: {
@@ -91,13 +86,13 @@ const styles = StyleSheet.create({
     marginTop: 80,
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
-    backgroundColor: Colors.white,
+    backgroundColor: theme.colors.white,
     position: "relative",
-    padding: Spacing.lg,
+    padding: theme.margins.lg,
   },
   profilePictureContainer: {
     alignItems: "center",
-    marginBottom: Spacing.md,
+    marginBottom: theme.margins.md,
   },
   profileImgContainer: {
     marginTop: -80,
@@ -115,15 +110,15 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     gap: 8,
     alignItems: "center",
-    marginBottom: Spacing.md,
+    marginBottom: theme.margins.md,
   },
-  decksSubtitle: { marginBottom: Spacing.sm },
+  decksSubtitle: { marginBottom: theme.margins.sm },
   decksContainer: {
-    paddingTop: Spacing.md,
-    paddingBottom: Spacing.md,
-    marginBottom: Spacing.sm,
-    marginLeft: -Spacing.lg,
-    marginRight: -Spacing.lg,
-    backgroundColor: Colors.lightGrey,
+    paddingTop: theme.margins.md,
+    paddingBottom: theme.margins.md,
+    marginBottom: theme.margins.sm,
+    marginLeft: -theme.margins.lg,
+    marginRight: -theme.margins.lg,
+    backgroundColor: theme.colors.lightGrey,
   },
-});
+}));
