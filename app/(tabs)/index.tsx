@@ -2,7 +2,7 @@ import { ScrollView, Text, View } from "react-native";
 
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { useAuth, useUser } from "@clerk/clerk-expo";
+import { useUser } from "@clerk/clerk-expo";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fetchUserByUsername } from "@/features/user/userThunks";
@@ -10,17 +10,14 @@ import { AppDispatch } from "@/features/store";
 
 export default function HomeScreen() {
   const { styles } = useStyles(stylesheet);
-  const { getToken } = useAuth();
 
   const { user } = useUser() || { user: {} };
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     (async () => {
-      const authToken = (await getToken({ template: "supabase" })) || "";
-
       if (user?.username) {
-        dispatch(fetchUserByUsername({ username: user.username, authToken }));
+        dispatch(fetchUserByUsername(user.username));
       }
     })();
   }, []);

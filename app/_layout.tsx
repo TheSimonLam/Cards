@@ -10,9 +10,6 @@ import { store } from "../features/store";
 import { Provider } from "react-redux";
 import "../styling/unistyles";
 
-const CLERK_PUBLISHABLE_KEY =
-  "pk_test_ZGVjZW50LXdyZW4tNjkuY2xlcmsuYWNjb3VudHMuZGV2JA";
-
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -71,7 +68,7 @@ export default function RootLayout() {
   return (
     <Provider store={store}>
       <ClerkProvider
-        publishableKey={CLERK_PUBLISHABLE_KEY}
+        publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY || ""}
         tokenCache={tokenCache}
       >
         <InitialLayout />
