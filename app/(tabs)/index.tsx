@@ -10,7 +10,6 @@ import { AppDispatch } from "@/features/store";
 
 export default function HomeScreen() {
   const { styles } = useStyles(stylesheet);
-
   const { user } = useUser() || { user: {} };
   const dispatch = useDispatch<AppDispatch>();
 
