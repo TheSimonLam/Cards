@@ -1,6 +1,12 @@
 import { Colors } from "@/constants/Colors";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
+
+export const enum ButtonVariantTypes {
+  SOLID = "solid",
+  DISABLED = "disabled",
+  OUTLINED = "outlined",
+}
 
 export type ButtonVariant = "solid" | "disabled" | "outlined";
 
@@ -16,7 +22,11 @@ export const Button = ({ text, onPress, variant }: ButtonProps) => {
   });
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.buttonContainer}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={styles.buttonContainer}
+      disabled={variant === ButtonVariantTypes.DISABLED}
+    >
       <Text style={styles.buttonText}>{text}</Text>
     </TouchableOpacity>
   );
