@@ -6,6 +6,7 @@ import { Stack } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Register = () => {
   const { styles } = useStyles(stylesheet);
@@ -67,60 +68,66 @@ const Register = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Stack.Screen options={{ headerBackVisible: !pendingVerification }} />
-      <Spinner visible={loading} />
+    <>
+      <LinearGradient
+        colors={[Colors.red, Colors.paleYellow, Colors.yellow]}
+        style={styles.background}
+      />
+      <SafeAreaView style={styles.container}>
+        <Stack.Screen options={{ headerBackVisible: !pendingVerification }} />
+        <Spinner visible={loading} />
 
-      {!pendingVerification && (
-        <>
-          <TextInput
-            autoCapitalize="none"
-            placeholder="Email"
-            value={emailAddress}
-            onChangeText={setEmailAddress}
-            style={styles.inputField}
-          />
-          <TextInput
-            autoCapitalize="none"
-            placeholder="Username"
-            value={username}
-            onChangeText={setUsername}
-            style={styles.inputField}
-          />
-          <TextInput
-            placeholder="password"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-            style={styles.inputField}
-          />
-
-          <Button
-            onPress={onSignUpPress}
-            title="Sign up"
-            color={Colors.red}
-          ></Button>
-        </>
-      )}
-
-      {pendingVerification && (
-        <>
-          <View>
+        {!pendingVerification && (
+          <>
             <TextInput
-              value={code}
-              placeholder="Code..."
+              autoCapitalize="none"
+              placeholder="Email"
+              value={emailAddress}
+              onChangeText={setEmailAddress}
               style={styles.inputField}
-              onChangeText={setCode}
             />
-          </View>
-          <Button
-            onPress={onPressVerify}
-            title="Verify Email"
-            color={Colors.red}
-          ></Button>
-        </>
-      )}
-    </SafeAreaView>
+            <TextInput
+              autoCapitalize="none"
+              placeholder="Username"
+              value={username}
+              onChangeText={setUsername}
+              style={styles.inputField}
+            />
+            <TextInput
+              placeholder="password"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry
+              style={styles.inputField}
+            />
+
+            <Button
+              onPress={onSignUpPress}
+              title="Sign up"
+              color={Colors.red}
+            ></Button>
+          </>
+        )}
+
+        {pendingVerification && (
+          <>
+            <View>
+              <TextInput
+                value={code}
+                placeholder="Code..."
+                style={styles.inputField}
+                onChangeText={setCode}
+              />
+            </View>
+            <Button
+              onPress={onPressVerify}
+              title="Verify Email"
+              color={Colors.red}
+            ></Button>
+          </>
+        )}
+      </SafeAreaView>
+    </>
   );
 };
 
@@ -129,6 +136,13 @@ const stylesheet = createStyleSheet({
     flex: 1,
     justifyContent: "center",
     padding: 20,
+  },
+  background: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: "100%",
   },
   inputField: {
     marginVertical: 4,

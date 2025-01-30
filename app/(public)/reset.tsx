@@ -5,6 +5,7 @@ import { useSignIn } from "@clerk/clerk-expo";
 import { Colors } from "@/constants/Colors";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { LinearGradient } from "expo-linear-gradient";
 
 const PwReset = () => {
   const { styles } = useStyles(stylesheet);
@@ -46,52 +47,58 @@ const PwReset = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Stack.Screen options={{ headerBackVisible: !successfulCreation }} />
+    <>
+      <LinearGradient
+        colors={[Colors.red, Colors.paleYellow, Colors.yellow]}
+        style={styles.background}
+      />
+      <SafeAreaView style={styles.container}>
+        <Stack.Screen options={{ headerBackVisible: !successfulCreation }} />
 
-      {!successfulCreation && (
-        <>
-          <TextInput
-            autoCapitalize="none"
-            placeholder="Email"
-            value={emailAddress}
-            onChangeText={setEmailAddress}
-            style={styles.inputField}
-          />
-
-          <Button
-            onPress={onRequestReset}
-            title="Send Reset Email"
-            color={Colors.red}
-          ></Button>
-        </>
-      )}
-
-      {successfulCreation && (
-        <>
-          <View>
+        {!successfulCreation && (
+          <>
             <TextInput
-              value={code}
-              placeholder="Code..."
-              style={styles.inputField}
-              onChangeText={setCode}
-            />
-            <TextInput
-              placeholder="New password"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
+              autoCapitalize="none"
+              placeholder="Email"
+              value={emailAddress}
+              onChangeText={setEmailAddress}
               style={styles.inputField}
             />
-          </View>
-          <Button
-            onPress={onReset}
-            title="Set new Password"
-            color={Colors.red}
-          ></Button>
-        </>
-      )}
-    </SafeAreaView>
+
+            <Button
+              onPress={onRequestReset}
+              title="Send Reset Email"
+              color={Colors.red}
+            ></Button>
+          </>
+        )}
+
+        {successfulCreation && (
+          <>
+            <View>
+              <TextInput
+                value={code}
+                placeholder="Code..."
+                style={styles.inputField}
+                onChangeText={setCode}
+              />
+              <TextInput
+                placeholder="New password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+                style={styles.inputField}
+              />
+            </View>
+            <Button
+              onPress={onReset}
+              title="Set new Password"
+              color={Colors.red}
+            ></Button>
+          </>
+        )}
+      </SafeAreaView>
+    </>
   );
 };
 
@@ -100,6 +107,13 @@ const stylesheet = createStyleSheet({
     flex: 1,
     justifyContent: "center",
     padding: 20,
+  },
+  background: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: "100%",
   },
   inputField: {
     marginVertical: 4,
