@@ -9,18 +9,28 @@ const supabase = createClient(supUrl, supKey);
 
 Deno.serve(async (req) => {
   const stripeData = await req.json()
-  const username = stripeData.data.username // TODO: Not sure what we get back from Stripe yet
+  const stripeUsername = stripeData.data.username // TODO: Not sure what we get back from Stripe yet
+  const amountToAdd = 500
 
-  const { balanceData, balanceError } = await supabase
+  const { userData, balanceError } = await supabase
   .from('users')
-  .select('balance')
-  .eq('username', username)
+  .select('balance', 'user_id')
+  .eq('username', stripeUsername)
 
   const { _data, error } = await supabase
   .from('users')
-  .update({ balance: balanceData.data += 500 })
-  .eq('username', username)
+  .update({ balance: userData.data.balance += amountToAdd })
+  .eq('username', stripeUsername)
   .select()
+
+  if(!error && !balanceError){
+    const { error } = await supabase
+    .from('transactions')
+    .insert([
+      { user_id: userData.data.user_id, action: 'Adding to balance from Stripe purchase', amount: amountToAdd },
+    ])
+    .select()
+  }
 
   console.log(error)
   console.log(balanceError)

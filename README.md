@@ -61,6 +61,5 @@ TODO:
 
 - If a user is requesting a user other than themselves, filter out private properties
 - Secure tables with RLS incase somebody gets their hands on the SUPABASE_ANON_KEY
-- Show Balance on Profile, Buy, Earn page
 - On the Buy page allow the user to purchase packs
 - Let the user swipe to open an pack and show them the cards they got
