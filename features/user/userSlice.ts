@@ -7,12 +7,12 @@ import { fetchUserByUsername } from "./userThunks";
 
 export interface UserState {
   value: number;
-  user: any
+  userDetails: any
 }
 
 const initialState: UserState = {
   value: 0,
-  user: {}
+  userDetails: {}
 };
 
 export const userSlice = createSlice({
@@ -31,7 +31,7 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUserByUsername.fulfilled, (state, action) => {
-      state.user = action.payload
+      state.userDetails = action.payload
     })
   },
 });
@@ -45,4 +45,9 @@ export const selectUser = (state: any) => state.user;
 export const selectUserValue = createSelector(
   selectUser,
   (user) => user.value
+);
+
+export const selectUserDetails = createSelector(
+  selectUser,
+  (user) => user.userDetails
 );

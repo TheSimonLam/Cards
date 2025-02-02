@@ -11,16 +11,18 @@ import { Button } from "@/elements/Button";
 import { useRouter } from "expo-router";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { selectUser } from "@/features/user/userSlice";
+import { selectUserDetails } from "@/features/user/userSlice";
 import { useSelector } from "react-redux";
 import { Text } from "@/elements/Text";
 
 export default function ProfileScreen() {
   const { user } = useUser() || { user: {} };
-  const userDetails = useSelector(selectUser);
+  const userDetails = useSelector(selectUserDetails);
   const { signOut } = useClerk();
   const router = useRouter();
   const { styles } = useStyles(stylesheet);
+
+  console.log(userDetails)
 
   const handleSignOut = async () => {
     try {
@@ -46,6 +48,8 @@ export default function ProfileScreen() {
               />
             </TouchableHighlight>
           </View>
+          
+          <Text>Your balance is: £{userDetails.balance}</Text>
 
           <View style={styles.usernameContainer}>
             <Text>GamerGuy01</Text>
