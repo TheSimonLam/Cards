@@ -1,4 +1,4 @@
-import { Text } from "react-native";
+import { Text } from "@/elements/Text";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function FollowingScreen() {

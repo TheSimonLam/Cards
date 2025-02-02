@@ -1,8 +1,6 @@
 import {
   Image,
   ScrollView,
-  Text,
-  TextInput,
   TouchableHighlight,
   View,
 } from "react-native";
@@ -15,6 +13,7 @@ import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { selectUser } from "@/features/user/userSlice";
 import { useSelector } from "react-redux";
+import { Text } from "@/elements/Text";
 
 export default function ProfileScreen() {
   const { user } = useUser() || { user: {} };
@@ -53,7 +52,7 @@ export default function ProfileScreen() {
             <Text>"Ha, you can't defeat me!"</Text>
           </View>
 
-          <Text style={styles.decksSubtitle}>My Decks</Text>
+          <Text>My Decks</Text>
 
           <View style={styles.decksContainer}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -117,7 +116,6 @@ const stylesheet = createStyleSheet((theme) => ({
     alignItems: "center",
     marginBottom: theme.margins.md,
   },
-  decksSubtitle: { marginBottom: theme.margins.sm },
   decksContainer: {
     paddingTop: theme.margins.md,
     paddingBottom: theme.margins.md,

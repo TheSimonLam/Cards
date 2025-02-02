@@ -2,11 +2,12 @@ import { Colors } from "@/constants/Colors";
 import { useSignIn } from "@clerk/clerk-expo";
 import { Link } from "expo-router";
 import React, { useState } from "react";
-import { TextInput, Button, Pressable, Text, Alert } from "react-native";
+import { TextInput, Button, Pressable} from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { LinearGradient } from "expo-linear-gradient";
+import { Text } from "@/elements/Text";
 
 const Login = () => {
   const { styles } = useStyles(stylesheet);

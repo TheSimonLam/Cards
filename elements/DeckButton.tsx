@@ -1,10 +1,9 @@
 import {
   Image,
-  Text,
   TouchableHighlight,
-  View,
 } from "react-native";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
+import { Text } from "./Text";
 
 export type DeckProps = {
   title: string;
