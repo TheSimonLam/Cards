@@ -1,41 +1,29 @@
 import { Colors } from "@/constants/Colors";
-import { useSignIn } from "@clerk/clerk-expo";
 import { Link } from "expo-router";
 import React, { useState } from "react";
-import { TextInput, Button, Pressable} from "react-native";
+import { TextInput, Button, Pressable, Alert } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { LinearGradient } from "expo-linear-gradient";
 import { Text } from "@/elements/Text";
+import { supabase } from "@/services/supabase";
 
 const Login = () => {
   const { styles } = useStyles(stylesheet);
 
-  const { signIn, setActive, isLoaded } = useSignIn();
-
-  const [emailAddressOrUsername, setEmailAddressOrUsername] = useState("");
+  const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const onSignInPress = async () => {
-    if (!isLoaded) {
-      return;
-    }
     setLoading(true);
-    try {
-      const completeSignIn = await signIn.create({
-        identifier: emailAddressOrUsername,
-        password,
-      });
-
-      // This indicates the user is signed in
-      await setActive({ session: completeSignIn.createdSessionId });
-    } catch (err: any) {
-      alert(err.errors[0].message);
-    } finally {
-      setLoading(false);
-    }
+    const { error } = await supabase.auth.signInWithPassword({
+      email: emailAddress,
+      password: password,
+    });
+    if (error) Alert.alert(error.message);
+    setLoading(false);
   };
 
   return (
@@ -49,9 +37,9 @@ const Login = () => {
 
         <TextInput
           autoCapitalize="none"
-          placeholder="Username or Email"
-          value={emailAddressOrUsername}
-          onChangeText={setEmailAddressOrUsername}
+          placeholder="Email"
+          value={emailAddress}
+          onChangeText={setEmailAddress}
           style={styles.inputField}
         />
         <TextInput

@@ -12,9 +12,7 @@ You can collect, battle with, and trade cards with other players.
 - Use Supabase broadcast for gameplay (perhaps we need to host game logic on a server to stop cheating)
 
 Tech used:
-Auth (Firebase/Clerk/Supabase)
-Supabase realtime subscription channels for games
-Firestore for Document/Collection database
+Supabase realtime subscription channels for games, Postgres, Edge (cloud) Functions, Auth
 
 Card Rarity
 1 Common
@@ -44,9 +42,7 @@ How to update Edge function with changes:
 How to set secrets/.env file:
 `npx supabase secrets set --env-file ./supabase/.env`
 
-Clerk takes a (secret) JWT Signing Key from Supabase that's used to generate a JWT to plug into request Authorization header. Edge Functions have JWT protection enabled and will automatically authenticate the call.
-
-Clerk webhooks need an Authorization header using the public Supabase JWT
+When a user is deleted from Supabase Auth table, their corresponding Profile table data row entry is also deleted (via. linked via foreign key and cascade deletion).
 
 RLS is needed so users can only edit their own information
 
@@ -55,11 +51,10 @@ https://dbdiagram.io/d/Cards-678e73846b7fa355c3762f2d
 
 Remember to test all inputs for error handling.
 
-Don't let users change username
-
 TODO:
 
 - If a user is requesting a user other than themselves, filter out private properties
 - Secure tables with RLS incase somebody gets their hands on the SUPABASE_ANON_KEY
 - On the Buy page allow the user to purchase packs
 - Let the user swipe to open an pack and show them the cards they got
+- When singing up and user presses "confirm email", deeplink back into the app by setting the "Site URL" within Auth tab in Supabase to com.anonymous.cards://login/

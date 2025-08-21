@@ -1,10 +1,4 @@
-import {
-  Image,
-  ScrollView,
-  TouchableHighlight,
-  View,
-} from "react-native";
-import { useClerk, useUser } from "@clerk/clerk-expo";
+import { Image, ScrollView, TouchableHighlight, View } from "react-native";
 
 import { DeckButton } from "@/elements/DeckButton";
 import { Button } from "@/elements/Button";
@@ -14,19 +8,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { selectUserDetails } from "@/features/user/userSlice";
 import { useSelector } from "react-redux";
 import { Text } from "@/elements/Text";
+import { supabase } from "@/services/supabase";
 
 export default function ProfileScreen() {
-  const { user } = useUser() || { user: {} };
-  const userDetails = useSelector(selectUserDetails);
-  const { signOut } = useClerk();
+  const userDetails = useSelector(selectUserDetails) || {};
   const router = useRouter();
   const { styles } = useStyles(stylesheet);
 
-  console.log(userDetails)
-
   const handleSignOut = async () => {
     try {
-      await signOut();
+      await supabase.auth.signOut();
       // Redirect to your desired page
       router.replace("/login");
     } catch (err) {
@@ -48,10 +39,10 @@ export default function ProfileScreen() {
               />
             </TouchableHighlight>
           </View>
-          
+
           <Text>Your balance is: £{userDetails.balance}</Text>
 
-          <View style={styles.usernameContainer}>
+          <View style={styles.userIdContainer}>
             <Text>GamerGuy01</Text>
             <Text>"Ha, you can't defeat me!"</Text>
           </View>
@@ -75,7 +66,7 @@ export default function ProfileScreen() {
             variant="solid"
           ></Button>
 
-          <Text>Welcome, {user?.emailAddresses[0].emailAddress} 🎉</Text>
+          <Text>Welcome, {userDetails.email_address} 🎉</Text>
           <Text>{JSON.stringify(userDetails)}</Text>
         </View>
       </View>
@@ -114,7 +105,7 @@ const stylesheet = createStyleSheet((theme) => ({
     width: 100,
     borderRadius: 60,
   },
-  usernameContainer: {
+  userIdContainer: {
     flexDirection: "column",
     gap: 8,
     alignItems: "center",

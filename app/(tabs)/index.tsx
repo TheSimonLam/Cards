@@ -1,23 +1,23 @@
 import { ScrollView, View } from "react-native";
 
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { useUser } from "@clerk/clerk-expo";
+import { useContext, useEffect } from "react";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { fetchUserByUsername } from "@/features/user/userThunks";
+import { fetchUserByUserId } from "@/features/user/userThunks";
 import { AppDispatch } from "@/features/store";
 import { Text } from "@/elements/Text";
+import { AuthContext } from "@/providers/AuthProvider";
 
 export default function HomeScreen() {
   const { styles } = useStyles(stylesheet);
-  const { user } = useUser() || { user: {} };
+  const authSession = useContext(AuthContext);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     (async () => {
-      if (user?.username) {
-        dispatch(fetchUserByUsername(user.username));
+      if (authSession?.user.id) {
+        dispatch(fetchUserByUserId(authSession?.user.id));
       }
     })();
   }, []);

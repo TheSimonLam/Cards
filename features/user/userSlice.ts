@@ -3,7 +3,7 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { fetchUserByUsername } from "./userThunks";
+import { fetchUserByUserId } from "./userThunks";
 
 export interface UserState {
   value: number;
@@ -30,7 +30,7 @@ export const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchUserByUsername.fulfilled, (state, action) => {
+    builder.addCase(fetchUserByUserId.fulfilled, (state, action) => {
       state.userDetails = action.payload
     })
   },

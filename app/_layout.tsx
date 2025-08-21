@@ -1,36 +1,52 @@
-import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 import { Slot, useRouter, useSegments } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "react-native-reanimated";
 import { store } from "../features/store";
 import { Provider } from "react-redux";
 import "../styling/unistyles";
 
+import "react-native-url-polyfill/auto";
+import { Session } from "@supabase/supabase-js";
+import { supabase } from "@/services/supabase";
+import { AuthContext } from "@/providers/AuthProvider";
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 const InitialLayout = () => {
-  const { isLoaded, isSignedIn } = useAuth();
+  const [session, setSession] = useState<Session | null>(null);
   const segments = useSegments();
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoaded) return;
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+    supabase.auth.onAuthStateChange(async (_event, session) => {
+      const inTabsGroup = segments[0] === "(tabs)";
 
-    const inTabsGroup = segments[0] === "(tabs)";
+      setSession(session);
+      if (session && !inTabsGroup) {
+        router.replace("/(tabs)/");
+      } else {
+        router.replace("/login");
+      }
 
-    if (isSignedIn && !inTabsGroup) {
-      router.replace("/(tabs)/");
-    } else if (!isSignedIn) {
-      router.replace("/login");
-    }
-  }, [isSignedIn]);
+      // if ("PASSWORD_RECOVERY") {
+      //redirect to password "reset" screen with path param as flag and:
+      // }
+    });
+  }, []);
 
-  return <Slot />;
+  return (
+    <AuthContext.Provider value={session}>
+      <Slot />
+    </AuthContext.Provider>
+  );
 };
 
 const tokenCache = {
@@ -67,12 +83,7 @@ export default function RootLayout() {
 
   return (
     <Provider store={store}>
-      <ClerkProvider
-        publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY || ""}
-        tokenCache={tokenCache}
-      >
-        <InitialLayout />
-      </ClerkProvider>
+      <InitialLayout />
     </Provider>
   );
 }

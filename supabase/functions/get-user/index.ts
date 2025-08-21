@@ -9,12 +9,12 @@ const supabase = createClient(supUrl, supKey);
 // Otherwise, filter it to show only public things
 
 Deno.serve(async (req) => {
-  const { username } = await req.json()
+  const { userId } = await req.json()
 
   const { data, error } = await supabase
-  .from('users')
+  .from('profiles')
   .select('*')
-  .eq('username', username)
+  .eq('user_id', userId)
 
   console.log(error);
 

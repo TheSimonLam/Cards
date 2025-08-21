@@ -1,11 +1,11 @@
 import { View, TextInput, Button } from "react-native";
 import React, { useState } from "react";
 import { Stack } from "expo-router";
-import { useSignIn } from "@clerk/clerk-expo";
 import { Colors } from "@/constants/Colors";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
+import { supabase } from "@/services/supabase";
 
 const PwReset = () => {
   const { styles } = useStyles(stylesheet);
@@ -14,15 +14,11 @@ const PwReset = () => {
   const [password, setPassword] = useState("");
   const [code, setCode] = useState("");
   const [successfulCreation, setSuccessfulCreation] = useState(false);
-  const { signIn, setActive } = useSignIn();
 
   // Request a passowrd reset code by email
   const onRequestReset = async () => {
     try {
-      await signIn.create({
-        strategy: "reset_password_email_code",
-        identifier: emailAddress,
-      });
+      await supabase.auth.resetPasswordForEmail(emailAddress);
       setSuccessfulCreation(true);
     } catch (err: any) {
       alert(err.errors[0].message);
@@ -32,15 +28,10 @@ const PwReset = () => {
   // Reset the password with the code and the new password
   const onReset = async () => {
     try {
-      const result = await signIn.attemptFirstFactor({
-        strategy: "reset_password_email_code",
-        code,
+      const { data, error } = await supabase.auth.updateUser({
         password,
       });
       alert("Password reset successfully");
-
-      // Set the user session active, which will log in the user automatically
-      await setActive({ session: result.createdSessionId });
     } catch (err: any) {
       alert(err.errors[0].message);
     }

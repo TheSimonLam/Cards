@@ -1,70 +1,36 @@
-import { Button, TextInput, View } from "react-native";
-import { useSignUp } from "@clerk/clerk-expo";
+import { Alert, Button, TextInput, View } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { useState } from "react";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
+import { supabase } from "@/services/supabase";
 
 const Register = () => {
   const { styles } = useStyles(stylesheet);
 
-  const { isLoaded, signUp, setActive } = useSignUp();
-
-  const [username, setUsername] = useState("");
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
   const [pendingVerification, setPendingVerification] = useState(false);
-  const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   // Create the user and send the verification email
   const onSignUpPress = async () => {
-    if (!isLoaded) {
-      return;
-    }
     setLoading(true);
-
-    try {
-      // Create the user on Clerk
-      await signUp.create({
-        emailAddress,
-        username,
-        password,
-      });
-
-      // Send verification Email
-      await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
-
-      // change the UI to verify the email address
-      setPendingVerification(true);
-    } catch (err: any) {
-      alert(err.errors[0].message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Verify the email address
-  const onPressVerify = async () => {
-    if (!isLoaded) {
-      return;
-    }
-    setLoading(true);
-
-    try {
-      const completeSignUp = await signUp.attemptEmailAddressVerification({
-        code,
-      });
-
-      await setActive({ session: completeSignUp.createdSessionId });
-    } catch (err: any) {
-      alert(err.errors[0].message);
-    } finally {
-      setLoading(false);
-    }
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signUp({
+      email: emailAddress,
+      password: password,
+    });
+    if (error) Alert.alert(error.message);
+    setPendingVerification(true);
+    if (!session) router.replace("/login");
+    setLoading(false);
   };
 
   return (
@@ -87,13 +53,6 @@ const Register = () => {
               style={styles.inputField}
             />
             <TextInput
-              autoCapitalize="none"
-              placeholder="Username"
-              value={username}
-              onChangeText={setUsername}
-              style={styles.inputField}
-            />
-            <TextInput
               placeholder="password"
               value={password}
               onChangeText={setPassword}
@@ -104,24 +63,6 @@ const Register = () => {
             <Button
               onPress={onSignUpPress}
               title="Sign up"
-              color={Colors.red}
-            ></Button>
-          </>
-        )}
-
-        {pendingVerification && (
-          <>
-            <View>
-              <TextInput
-                value={code}
-                placeholder="Code..."
-                style={styles.inputField}
-                onChangeText={setCode}
-              />
-            </View>
-            <Button
-              onPress={onPressVerify}
-              title="Verify Email"
               color={Colors.red}
             ></Button>
           </>
