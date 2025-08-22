@@ -2,7 +2,7 @@ import { Image, ScrollView, TouchableHighlight, View } from "react-native";
 
 import { DeckButton } from "@/elements/DeckButton";
 import { Button } from "@/elements/Button";
-import { useFocusEffect, useRouter } from "expo-router";
+import { useFocusEffect } from "expo-router";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import {
   SafeAreaView,
@@ -18,15 +18,17 @@ import {
 } from "@/features/user/userThunks";
 import { AuthContext } from "@/providers/AuthProvider";
 import { AppDispatch } from "@/features/store";
-import { useCallback, useContext, useEffect } from "react";
+import { useCallback, useContext, useState } from "react";
+import { FullScreenModal } from "@/components/modals/FullScreenModal";
+import { DeckViewer } from "@/components/modals/DeckViewer";
 
 export default function ProfileScreen() {
   const userDetails = useSelector(selectUserDetails) || {};
-  const router = useRouter();
   const { styles } = useStyles(stylesheet);
   const dispatch = useDispatch<AppDispatch>();
   const authSession = useContext(AuthContext);
   const { top: topSafeAreaInset } = useSafeAreaInsets();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleSignOut = async () => {
     try {
@@ -44,6 +46,14 @@ export default function ProfileScreen() {
     if (authSession?.user.id) {
       dispatch(fetchUserByUserId(authSession?.user.id));
     }
+  };
+
+  const onDeckButtonPress = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalVisible(false);
   };
 
   useFocusEffect(
@@ -84,12 +94,30 @@ export default function ProfileScreen() {
 
           <View style={styles.decksContainer}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              <DeckButton title="Unorganized"></DeckButton>
-              <DeckButton title="Fire"></DeckButton>
-              <DeckButton title="Electric"></DeckButton>
-              <DeckButton title="Bad deck"></DeckButton>
-              <DeckButton title="Unbeatable"></DeckButton>
-              <DeckButton title="New Deck"></DeckButton>
+              <DeckButton
+                onDeckButtonPress={onDeckButtonPress}
+                title="Unorganized"
+              ></DeckButton>
+              <DeckButton
+                onDeckButtonPress={onDeckButtonPress}
+                title="Fire"
+              ></DeckButton>
+              <DeckButton
+                onDeckButtonPress={onDeckButtonPress}
+                title="Electric"
+              ></DeckButton>
+              <DeckButton
+                onDeckButtonPress={onDeckButtonPress}
+                title="Bad deck"
+              ></DeckButton>
+              <DeckButton
+                onDeckButtonPress={onDeckButtonPress}
+                title="Unbeatable"
+              ></DeckButton>
+              <DeckButton
+                onDeckButtonPress={onDeckButtonPress}
+                title="New Deck"
+              ></DeckButton>
             </ScrollView>
           </View>
 
@@ -100,6 +128,13 @@ export default function ProfileScreen() {
           ></Button>
         </View>
       </View>
+
+      <FullScreenModal
+        isModalVisible={isModalVisible}
+        onClosePress={handleModalClose}
+      >
+        <DeckViewer />
+      </FullScreenModal>
     </SafeAreaView>
   );
 }
