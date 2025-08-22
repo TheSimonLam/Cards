@@ -26,7 +26,6 @@ Card Rarity
 Note:
 
 - Maybe need a card opening server to securely randomize the opening of cards, and read/update the cards and decks collection database
-- On init of the app, check to see if the downloaded cards (in local storage) version is out of date. If it is, make a call to download all of the cards and store them, along with the new version number, in local storage.
 
 Database notes:
 
@@ -57,4 +56,4 @@ TODO:
 - Secure tables with RLS incase somebody gets their hands on the SUPABASE_ANON_KEY
 - On the Buy page allow the user to purchase packs
 - Let the user swipe to open an pack and show them the cards they got
-- When singing up and user presses "confirm email", deeplink back into the app by setting the "Site URL" within Auth tab in Supabase to com.anonymous.cards://login/
+- When signing up and user presses "confirm email", deeplink back into the app by setting the "Site URL" within Auth tab in Supabase to com.anonymous.cards://login/
