@@ -1,11 +1,10 @@
-import { Alert, Button, TextInput, View } from "react-native";
+import { Alert, Button, TextInput } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { useState } from "react";
 import { Stack, useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { LinearGradient } from "expo-linear-gradient";
 import { supabase } from "@/services/supabase";
 
 const Register = () => {
@@ -35,10 +34,6 @@ const Register = () => {
 
   return (
     <>
-      <LinearGradient
-        colors={[Colors.red, Colors.paleYellow, Colors.yellow]}
-        style={styles.background}
-      />
       <SafeAreaView style={styles.container}>
         <Stack.Screen options={{ headerBackVisible: !pendingVerification }} />
         <Spinner visible={loading} />

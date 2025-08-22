@@ -4,7 +4,6 @@ import { Stack } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { LinearGradient } from "expo-linear-gradient";
 import { supabase } from "@/services/supabase";
 
 const PwReset = () => {
@@ -39,10 +38,6 @@ const PwReset = () => {
 
   return (
     <>
-      <LinearGradient
-        colors={[Colors.red, Colors.paleYellow, Colors.yellow]}
-        style={styles.background}
-      />
       <SafeAreaView style={styles.container}>
         <Stack.Screen options={{ headerBackVisible: !successfulCreation }} />
 
