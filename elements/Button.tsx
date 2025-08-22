@@ -34,7 +34,7 @@ export const Button = ({ text, onPress, variant }: ButtonProps) => {
 
 const stylesheet = createStyleSheet((theme) => ({
   buttonContainer: {
-    height: 50,
+    height: 44,
     borderRadius: 10,
     flexDirection: "column",
     justifyContent: "center",
@@ -58,8 +58,8 @@ const stylesheet = createStyleSheet((theme) => ({
     },
   },
   buttonText: {
-    fontSize: 20,
-    fontWeight: "600",
+    fontSize: 16,
+    fontWeight: "500",
     color: Colors.white,
     variants: {
       variant: {

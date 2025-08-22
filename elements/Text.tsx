@@ -4,7 +4,7 @@ import { createStyleSheet, useStyles } from "react-native-unistyles";
 type TextProps = {
   children: React.ReactNode;
   alignment?: "left" | "center" | "right";
-  weight?: "regular" | "medium" | "semiBold" | "bold";
+  weight?: "regular" | "semibold" | "bold";
   fontSize?: number;
   numberOfLines?: number;
   selectable?: boolean;
@@ -41,8 +41,9 @@ export const Text = ({
 const stylesheet = createStyleSheet((theme) => ({
   text: (props: Partial<TextProps>) => ({
     textAlignment: props.alignment ? props.alignment : "left",
-    fontFamily: props.weight ? props.weight : "regular",
+    fontFamily: "regular",
     fontSize: props.fontSize,
     color: theme.colors.text,
+    fontWeight: props.weight,
   }),
 }));

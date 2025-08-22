@@ -70,14 +70,15 @@ export default function ProfileScreen() {
             </TouchableHighlight>
           </View>
 
-          <Text>Your balance is: £{userDetails.balance}</Text>
+          <View style={styles.userIdContainer}>
+            <Text weight="bold" fontSize={24}>
+              GamerGuy01
+            </Text>
+            <Text>"Ha, you can't defeat me!"</Text>
+            <Text>£{userDetails.balance || 0}</Text>
+          </View>
 
           <Button onPress={addMoney} text="Add £20" variant="solid" />
-
-          <View style={styles.userIdContainer}>
-            <Text>GamerGuy01</Text>
-            <Text>"Ha, you can't defeat me!"</Text>
-          </View>
 
           <Text>My Decks</Text>
 
@@ -97,8 +98,6 @@ export default function ProfileScreen() {
             text="Sign Out"
             variant="solid"
           ></Button>
-
-          <Text>Welcome, {userDetails.email_address} 🎉</Text>
         </View>
       </View>
     </SafeAreaView>

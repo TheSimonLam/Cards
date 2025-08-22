@@ -1,7 +1,7 @@
 import { Colors } from "@/constants/Colors";
 import { Link } from "expo-router";
 import React, { useState } from "react";
-import { TextInput, Button, Pressable, Alert } from "react-native";
+import { TextInput, Button, Pressable, Alert, Image, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { LinearGradient } from "expo-linear-gradient";
@@ -31,6 +31,15 @@ const Login = () => {
         end={{ x: 1, y: 1 }}
       />
       <SafeAreaView style={styles.container}>
+        <View style={styles.logoImgContainer}>
+          <Image
+            source={{
+              uri: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/e0ea4e74-8e44-4e0e-9c55-eb7b22916821/d6f4or1-45193032-1b07-4bdb-b533-065e334250f4.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2UwZWE0ZTc0LThlNDQtNGUwZS05YzU1LWViN2IyMjkxNjgyMVwvZDZmNG9yMS00NTE5MzAzMi0xYjA3LTRiZGItYjUzMy0wNjVlMzM0MjUwZjQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.hLohtHQPmPQn43i9gwHYpVVGh7GJAXQdShQS7qCcOHs",
+            }}
+            style={styles.logoImg}
+          />
+        </View>
+
         <TextInput
           autoCapitalize="none"
           placeholder="Email"
@@ -79,6 +88,12 @@ const stylesheet = createStyleSheet({
     right: 0,
     top: 0,
     height: "100%",
+  },
+  logoImgContainer: { alignItems: "center", marginBottom: 100 },
+  logoImg: {
+    height: 100,
+    width: 100,
+    borderRadius: 60,
   },
   inputField: {
     marginVertical: 4,
