@@ -12,8 +12,8 @@ import { supabase } from "@/services/supabase";
 const Login = () => {
   const { styles } = useStyles(stylesheet);
 
-  const [emailAddress, setEmailAddress] = useState("");
-  const [password, setPassword] = useState("");
+  const [emailAddress, setEmailAddress] = useState("thesimonlam@gmail.com");
+  const [password, setPassword] = useState("HelloWorld");
   const [loading, setLoading] = useState(false);
 
   const onSignInPress = async () => {

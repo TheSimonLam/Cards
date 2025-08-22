@@ -13,16 +13,33 @@ import "react-native-url-polyfill/auto";
 import { Session } from "@supabase/supabase-js";
 import { supabase } from "@/services/supabase";
 import { AuthContext } from "@/providers/AuthProvider";
+import { useInitUserPreferences } from "@/hooks/useUser";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+
+SplashScreen.setOptions({
+  duration: 300,
+  fade: true,
+});
 
 const InitialLayout = () => {
   const [session, setSession] = useState<Session | null>(null);
   const segments = useSegments();
   const router = useRouter();
+  const [appReady, setAppReady] = useState(false);
+  const { initUserPrefs } = useInitUserPreferences();
+
+  useEffect(function initApp() {
+    (async () => {
+      await initUserPrefs();
+      setAppReady(true);
+    })();
+  }, []);
 
   useEffect(() => {
+    if (!appReady) return;
+
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
     });
@@ -31,7 +48,7 @@ const InitialLayout = () => {
 
       setSession(session);
       if (session && !inTabsGroup) {
-        router.replace("/(tabs)/");
+        router.replace("/(tabs)");
       } else {
         router.replace("/login");
       }
@@ -40,30 +57,13 @@ const InitialLayout = () => {
       //redirect to password "reset" screen with path param as flag and:
       // }
     });
-  }, []);
+  }, [appReady]);
 
   return (
     <AuthContext.Provider value={session}>
       <Slot />
     </AuthContext.Provider>
   );
-};
-
-const tokenCache = {
-  async getToken(key: string) {
-    try {
-      return SecureStore.getItemAsync(key);
-    } catch (err) {
-      return null;
-    }
-  },
-  async saveToken(key: string, value: string) {
-    try {
-      return SecureStore.setItemAsync(key, value);
-    } catch (err) {
-      return;
-    }
-  },
 };
 
 export default function RootLayout() {
