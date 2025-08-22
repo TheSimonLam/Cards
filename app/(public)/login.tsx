@@ -14,27 +14,24 @@ const Login = () => {
 
   const [emailAddress, setEmailAddress] = useState("thesimonlam@gmail.com");
   const [password, setPassword] = useState("HelloWorld");
-  const [loading, setLoading] = useState(false);
 
   const onSignInPress = async () => {
-    setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({
       email: emailAddress,
       password: password,
     });
     if (error) Alert.alert(error.message);
-    setLoading(false);
   };
 
   return (
     <>
       <LinearGradient
-        colors={[Colors.red, Colors.paleYellow, Colors.yellow]}
+        colors={[Colors.yellow, Colors.paleYellow, Colors.red]}
         style={styles.background}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
       />
       <SafeAreaView style={styles.container}>
-        <Spinner visible={loading} />
-
         <TextInput
           autoCapitalize="none"
           placeholder="Email"

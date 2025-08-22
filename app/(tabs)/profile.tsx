@@ -28,7 +28,6 @@ export default function ProfileScreen() {
     try {
       await supabase.auth.signOut();
       // Redirect to your desired page
-      router.replace("/login");
     } catch (err) {
       console.error(JSON.stringify(err, null, 2));
     }
