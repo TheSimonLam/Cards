@@ -2,7 +2,6 @@ import { Colors } from "@/constants/Colors";
 import { Link } from "expo-router";
 import React, { useState } from "react";
 import { TextInput, Button, Pressable, Alert } from "react-native";
-import Spinner from "react-native-loading-spinner-overlay";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { LinearGradient } from "expo-linear-gradient";

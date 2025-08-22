@@ -11,7 +11,7 @@ export default function TabLayout() {
         tabBarInactiveTintColor: "#fff",
         tabBarActiveTintColor: Colors["light"].tint,
         headerShown: false,
-        tabBarShowLabel: false,
+        tabBarShowLabel: true,
         tabBarStyle: { backgroundColor: Colors["light"].footerBackgroundColor },
       }}
     >

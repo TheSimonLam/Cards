@@ -4,7 +4,10 @@ import { DeckButton } from "@/elements/DeckButton";
 import { Button } from "@/elements/Button";
 import { useFocusEffect, useRouter } from "expo-router";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import { selectUserDetails } from "@/features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Text } from "@/elements/Text";
@@ -15,7 +18,7 @@ import {
 } from "@/features/user/userThunks";
 import { AuthContext } from "@/providers/AuthProvider";
 import { AppDispatch } from "@/features/store";
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect } from "react";
 
 export default function ProfileScreen() {
   const userDetails = useSelector(selectUserDetails) || {};
@@ -23,6 +26,7 @@ export default function ProfileScreen() {
   const { styles } = useStyles(stylesheet);
   const dispatch = useDispatch<AppDispatch>();
   const authSession = useContext(AuthContext);
+  const { top: topSafeAreaInset } = useSafeAreaInsets();
 
   const handleSignOut = async () => {
     try {
@@ -42,23 +46,24 @@ export default function ProfileScreen() {
     }
   };
 
-  useFocusEffect(() => {
-    (async () => {
+  useFocusEffect(
+    useCallback(() => {
       if (authSession?.user.id) {
         dispatch(fetchUserByUserId(authSession?.user.id));
       }
-    })();
-  });
+      return () => {};
+    }, [])
+  );
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.profileBackgroundContainer}>
+    <SafeAreaView style={styles.container} edges={["bottom"]}>
+      <View style={styles.profileBackgroundContainer({ topSafeAreaInset })}>
         <View style={styles.profileBodyContainer}>
           <View style={styles.profilePictureContainer}>
             <TouchableHighlight style={[styles.profileImgContainer]}>
               <Image
                 source={{
-                  uri: "https://i.ebayimg.com/images/g/XZ4AAOSwQJ1eiTfV/s-l1200.jpg",
+                  uri: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/e0ea4e74-8e44-4e0e-9c55-eb7b22916821/d6f4or1-45193032-1b07-4bdb-b533-065e334250f4.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2UwZWE0ZTc0LThlNDQtNGUwZS05YzU1LWViN2IyMjkxNjgyMVwvZDZmNG9yMS00NTE5MzAzMi0xYjA3LTRiZGItYjUzMy0wNjVlMzM0MjUwZjQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.hLohtHQPmPQn43i9gwHYpVVGh7GJAXQdShQS7qCcOHs",
                 }}
                 style={styles.profileImg}
               />
@@ -101,11 +106,15 @@ export default function ProfileScreen() {
 }
 
 const stylesheet = createStyleSheet((theme) => ({
-  profileBackgroundContainer: {
+  container: {
+    flex: 1,
+  },
+  profileBackgroundContainer: ({ topSafeAreaInset }) => ({
     flex: 1,
     backgroundColor: theme.colors.yellow,
     position: "relative",
-  },
+    paddingTop: topSafeAreaInset,
+  }),
   profileBodyContainer: {
     flex: 1,
     marginTop: 80,

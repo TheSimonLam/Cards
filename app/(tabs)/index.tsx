@@ -23,11 +23,13 @@ export default function HomeScreen() {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={styles.container}>
       <ScrollView>
         <View>
           <View style={styles.titleContainer}>
-            <Text>Explore</Text>
+            <Text fontSize={24} weight="bold">
+              Explore
+            </Text>
           </View>
         </View>
       </ScrollView>
@@ -35,7 +37,12 @@ export default function HomeScreen() {
   );
 }
 
-const stylesheet = createStyleSheet({
+const stylesheet = createStyleSheet((theme) => ({
+  container: {
+    flex: 1,
+    paddingLeft: theme.margins.md,
+    paddingRight: theme.margins.md,
+  },
   titleContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -45,4 +52,4 @@ const stylesheet = createStyleSheet({
     gap: 8,
     marginBottom: 8,
   },
-});
+}));
