@@ -16,4 +16,21 @@ export const fetchUserByUserId = createAsyncThunk(
           return data?.data[0]
         }
     },
+)
+
+  export const fetchAddUserMoney = createAsyncThunk(
+    'user/fetchAddUserMoney',
+    async ({email, amount}: {email: string, amount: number}) => {
+        const { data, error } = await supabase.functions.invoke('add-user-balance', {
+          body: JSON.stringify({ data: {email, amount} })
+        })
+
+        if(error){
+          return undefined
+        }
+        else
+        {
+          return data?.data[0]
+        }
+    },
   )

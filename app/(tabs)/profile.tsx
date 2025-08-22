@@ -2,18 +2,27 @@ import { Image, ScrollView, TouchableHighlight, View } from "react-native";
 
 import { DeckButton } from "@/elements/DeckButton";
 import { Button } from "@/elements/Button";
-import { useRouter } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { selectUserDetails } from "@/features/user/userSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Text } from "@/elements/Text";
 import { supabase } from "@/services/supabase";
+import {
+  fetchAddUserMoney,
+  fetchUserByUserId,
+} from "@/features/user/userThunks";
+import { AuthContext } from "@/providers/AuthProvider";
+import { AppDispatch } from "@/features/store";
+import { useContext, useEffect } from "react";
 
 export default function ProfileScreen() {
   const userDetails = useSelector(selectUserDetails) || {};
   const router = useRouter();
   const { styles } = useStyles(stylesheet);
+  const dispatch = useDispatch<AppDispatch>();
+  const authSession = useContext(AuthContext);
 
   const handleSignOut = async () => {
     try {
@@ -24,6 +33,23 @@ export default function ProfileScreen() {
       console.error(JSON.stringify(err, null, 2));
     }
   };
+
+  const addMoney = () => {
+    dispatch(
+      fetchAddUserMoney({ amount: 20, email: userDetails.email_address })
+    );
+    if (authSession?.user.id) {
+      dispatch(fetchUserByUserId(authSession?.user.id));
+    }
+  };
+
+  useFocusEffect(() => {
+    (async () => {
+      if (authSession?.user.id) {
+        dispatch(fetchUserByUserId(authSession?.user.id));
+      }
+    })();
+  });
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -41,6 +67,8 @@ export default function ProfileScreen() {
           </View>
 
           <Text>Your balance is: £{userDetails.balance}</Text>
+
+          <Button onPress={addMoney} text="Add £20" variant="solid" />
 
           <View style={styles.userIdContainer}>
             <Text>GamerGuy01</Text>
@@ -67,7 +95,6 @@ export default function ProfileScreen() {
           ></Button>
 
           <Text>Welcome, {userDetails.email_address} 🎉</Text>
-          <Text>{JSON.stringify(userDetails)}</Text>
         </View>
       </View>
     </SafeAreaView>

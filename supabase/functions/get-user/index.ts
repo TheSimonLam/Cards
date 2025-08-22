@@ -1,15 +1,19 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts"
 import { createClient } from 'jsr:@supabase/supabase-js@2'
 
-const supUrl = Deno.env.get ("PUBLIC_SUPABASE_URL") as string;
-const supKey = Deno.env.get ("PUBLIC_ANON_KEY") as string;
-const supabase = createClient(supUrl, supKey);
-
 // TODO: Protect this so that if a user is requesting their own info, show it all.
 // Otherwise, filter it to show only public things
 
 Deno.serve(async (req) => {
   const { userId } = await req.json()
+
+  const supUrl = Deno.env.get ("PUBLIC_SUPABASE_URL") as string;
+  const supKey = Deno.env.get ("PUBLIC_ANON_KEY") as string;
+  const supabase = createClient(supUrl, supKey, {
+    global: {
+      headers: { Authorization: req.headers.get('Authorization')! },
+    },
+  });
 
   const { data, error } = await supabase
   .from('profiles')
@@ -17,6 +21,10 @@ Deno.serve(async (req) => {
   .eq('user_id', userId)
 
   console.log(error);
+
+  if (error) {
+    return new Response('get-user error', { status: 500 })
+  }
 
   return new Response(
     JSON.stringify({data}),
