@@ -18,9 +18,8 @@ import {
 } from "@/features/user/userThunks";
 import { AuthContext } from "@/providers/AuthProvider";
 import { AppDispatch } from "@/features/store";
-import { useCallback, useContext, useState } from "react";
-import { FullScreenModal } from "@/components/modals/FullScreenModal";
-import { DeckViewer } from "@/components/modals/DeckViewer";
+import { useCallback, useContext } from "react";
+import { setDeckViewerOpenWithDeckId } from "@/features/global/globalSlice";
 
 export default function ProfileScreen() {
   const userDetails = useSelector(selectUserDetails) || {};
@@ -28,7 +27,6 @@ export default function ProfileScreen() {
   const dispatch = useDispatch<AppDispatch>();
   const authSession = useContext(AuthContext);
   const { top: topSafeAreaInset } = useSafeAreaInsets();
-  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleSignOut = async () => {
     try {
@@ -49,11 +47,7 @@ export default function ProfileScreen() {
   };
 
   const onDeckButtonPress = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleModalClose = () => {
-    setIsModalVisible(false);
+    dispatch(setDeckViewerOpenWithDeckId(new Date().toTimeString()));
   };
 
   useFocusEffect(
@@ -128,13 +122,6 @@ export default function ProfileScreen() {
           ></Button>
         </View>
       </View>
-
-      <FullScreenModal
-        isModalVisible={isModalVisible}
-        onClosePress={handleModalClose}
-      >
-        <DeckViewer />
-      </FullScreenModal>
     </SafeAreaView>
   );
 }

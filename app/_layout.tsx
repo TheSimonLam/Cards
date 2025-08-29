@@ -6,7 +6,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useState } from "react";
 import "react-native-reanimated";
 import { store } from "../features/store";
-import { Provider } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import "../styling/unistyles";
 
 import "react-native-url-polyfill/auto";
@@ -14,6 +14,9 @@ import { Session } from "@supabase/supabase-js";
 import { supabase } from "@/services/supabase";
 import { AuthContext } from "@/providers/AuthProvider";
 import { useInitUserPreferences } from "@/hooks/useUser";
+import { FullScreenModal } from "@/components/modals/FullScreenModal";
+import { DeckViewer } from "@/components/modals/DeckViewer";
+import { selectDeckViewerOpenWithDeckId, setDeckViewerOpenWithDeckId } from "@/features/global/globalSlice";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -29,6 +32,12 @@ const InitialLayout = () => {
   const router = useRouter();
   const [appReady, setAppReady] = useState(false);
   const { initUserPrefs } = useInitUserPreferences();
+  const dispatch = useDispatch();
+  const isDeckViewerModalVisible = useSelector(selectDeckViewerOpenWithDeckId)
+
+  const onCloseDeckViewerModal = () => {
+    dispatch(setDeckViewerOpenWithDeckId(''));
+  };
 
   useEffect(function initApp() {
     (async () => {
@@ -62,6 +71,12 @@ const InitialLayout = () => {
   return (
     <AuthContext.Provider value={session}>
       <Slot />
+      <FullScreenModal
+        isModalVisible={!!isDeckViewerModalVisible}
+        onClosePress={onCloseDeckViewerModal}
+      >
+        <DeckViewer />
+      </FullScreenModal>
     </AuthContext.Provider>
   );
 };

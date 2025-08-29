@@ -2,30 +2,30 @@ import { createSelector, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface GlobalState {
-  someVal: boolean;
+  deckViewerOpenWithDeckId: string;
 }
 
 const initialState: GlobalState = {
-  someVal: false,
+  deckViewerOpenWithDeckId: '',
 };
 
 export const globalSlice = createSlice({
   name: "global",
   initialState,
   reducers: {
-    setSomeVal: (state, action: PayloadAction<boolean>) => {
-      state.someVal = action.payload;
+    setDeckViewerOpenWithDeckId: (state, action: PayloadAction<string>) => {
+      state.deckViewerOpenWithDeckId = action.payload;
     },
   },
 });
 
-export const { setSomeVal } = globalSlice.actions;
+export const { setDeckViewerOpenWithDeckId } = globalSlice.actions;
 
 export default globalSlice.reducer;
 
 export const selectGlobal = (state: any) => state.global;
 
-export const selectSomeVal = createSelector(
+export const selectDeckViewerOpenWithDeckId = createSelector(
   selectGlobal,
-  (global) => global.someVal
+  (global) => global.deckViewerOpenWithDeckId
 );
