@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPacks } from "@/features/cards/cardsThunks";
 import { AppDispatch } from "@/features/store";
 import { selectPacks } from "@/features/cards/cardsSlice";
+import { setCardViewerOpenWithCardIds } from "@/features/global/globalSlice";
 
 export default function BuyScreen() {
   const { styles } = useStyles(stylesheet);
@@ -16,7 +17,8 @@ export default function BuyScreen() {
   const packs = useSelector(selectPacks);
 
   const onBuyPress = (packId: string) => {
-    console.log(packId);
+    //TODO: Open an new pack and return cards in that new pack
+    dispatch(setCardViewerOpenWithCardIds(['1', '2', '3']));
   };
 
   useEffect(() => {
@@ -34,6 +36,7 @@ export default function BuyScreen() {
           </View>
           {packs.map((pack: any) => (
             <Button
+              key={pack.pack_id}
               variant="solid"
               text={pack.name}
               onPress={() => {
