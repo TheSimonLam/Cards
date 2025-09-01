@@ -10,15 +10,17 @@ import { fetchPacks } from "@/features/cards/cardsThunks";
 import { AppDispatch } from "@/features/store";
 import { selectPacks } from "@/features/cards/cardsSlice";
 import { setCardViewerOpenWithCardIds } from "@/features/global/globalSlice";
+import { selectUserDetails } from "@/features/user/userSlice";
 
 export default function BuyScreen() {
   const { styles } = useStyles(stylesheet);
   const dispatch = useDispatch<AppDispatch>();
   const packs = useSelector(selectPacks);
+  const userDetails = useSelector(selectUserDetails) || {};
 
   const onBuyPress = (packId: string) => {
     //TODO: Open an new pack and return cards in that new pack
-    dispatch(setCardViewerOpenWithCardIds(['1', '2', '3']));
+    dispatch(setCardViewerOpenWithCardIds(["1", "2", "3"]));
   };
 
   useEffect(() => {
@@ -33,6 +35,7 @@ export default function BuyScreen() {
             <Text fontSize={24} weight="bold">
               Buy
             </Text>
+            <Text>£{userDetails.balance || 0}</Text>
           </View>
           {packs.map((pack: any) => (
             <Button
