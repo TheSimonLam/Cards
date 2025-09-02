@@ -8,12 +8,13 @@ import {
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
-import { selectUserDetails } from "@/features/user/userSlice";
+import { selectDecks, selectUserDetails } from "@/features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Text } from "@/elements/Text";
 import { supabase } from "@/services/supabase";
 import {
   fetchAddUserMoney,
+  fetchDecksByUserId,
   fetchUserByUserId,
 } from "@/features/user/userThunks";
 import { AuthContext } from "@/providers/AuthProvider";
@@ -22,7 +23,8 @@ import { useCallback, useContext } from "react";
 import { setDeckViewerOpenWithDeckId } from "@/features/global/globalSlice";
 
 export default function ProfileScreen() {
-  const userDetails = useSelector(selectUserDetails) || {};
+  const userDetails = useSelector(selectUserDetails);
+  const decks = useSelector(selectDecks);
   const { styles } = useStyles(stylesheet);
   const dispatch = useDispatch<AppDispatch>();
   const authSession = useContext(AuthContext);
@@ -39,7 +41,11 @@ export default function ProfileScreen() {
 
   const addMoney = () => {
     dispatch(
-      fetchAddUserMoney({ amount: 20, email: userDetails.email_address, userId: authSession?.user.id })
+      fetchAddUserMoney({
+        amount: 20,
+        email: userDetails.email_address,
+        userId: authSession?.user.id,
+      })
     );
   };
 
@@ -51,6 +57,7 @@ export default function ProfileScreen() {
     useCallback(() => {
       if (authSession?.user.id) {
         dispatch(fetchUserByUserId(authSession?.user.id));
+        dispatch(fetchDecksByUserId(authSession?.user.id));
       }
       return () => {};
     }, [])
@@ -81,34 +88,15 @@ export default function ProfileScreen() {
 
           <Button onPress={addMoney} text="Add £20" variant="solid" />
 
-          <Text>My Decks</Text>
-
           <View style={styles.decksContainer}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              <DeckButton
-                onDeckButtonPress={onDeckButtonPress}
-                title="Unorganized"
-              ></DeckButton>
-              <DeckButton
-                onDeckButtonPress={onDeckButtonPress}
-                title="Fire"
-              ></DeckButton>
-              <DeckButton
-                onDeckButtonPress={onDeckButtonPress}
-                title="Electric"
-              ></DeckButton>
-              <DeckButton
-                onDeckButtonPress={onDeckButtonPress}
-                title="Bad deck"
-              ></DeckButton>
-              <DeckButton
-                onDeckButtonPress={onDeckButtonPress}
-                title="Unbeatable"
-              ></DeckButton>
-              <DeckButton
-                onDeckButtonPress={onDeckButtonPress}
-                title="New Deck"
-              ></DeckButton>
+              {decks.map((deck) => (
+                <DeckButton
+                  key={deck.deck_id}
+                  onDeckButtonPress={onDeckButtonPress}
+                  title={deck.name}
+                ></DeckButton>
+              ))}
             </ScrollView>
           </View>
 
@@ -126,6 +114,7 @@ export default function ProfileScreen() {
 const stylesheet = createStyleSheet((theme) => ({
   container: {
     flex: 1,
+    backgroundColor: theme.colors.white,
   },
   profileBackgroundContainer: ({ topSafeAreaInset }) => ({
     flex: 1,
@@ -170,6 +159,5 @@ const stylesheet = createStyleSheet((theme) => ({
     marginBottom: theme.margins.sm,
     marginLeft: -theme.margins.lg,
     marginRight: -theme.margins.lg,
-    backgroundColor: theme.colors.lightGrey,
   },
 }));

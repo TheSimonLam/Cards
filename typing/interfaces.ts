@@ -38,3 +38,13 @@ export interface Pack {
     "num_packs_opened": number,
     "pack_id": string
 }
+
+export interface Deck {
+    "created_at": Date,
+    "deck_id": string,
+    "description": string,
+    "is_editable": boolean,
+    "is_private": boolean,
+    "name": string,
+    "owner_user_id": string
+}

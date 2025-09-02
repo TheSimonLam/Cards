@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useContext, useEffect } from "react";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { fetchUserByUserId } from "@/features/user/userThunks";
+import { fetchDecksByUserId, fetchUserByUserId } from "@/features/user/userThunks";
 import { AppDispatch } from "@/features/store";
 import { Text } from "@/elements/Text";
 import { AuthContext } from "@/providers/AuthProvider";
@@ -18,6 +18,7 @@ export default function HomeScreen() {
     (async () => {
       if (authSession?.user.id) {
         dispatch(fetchUserByUserId(authSession?.user.id));
+        dispatch(fetchDecksByUserId(authSession?.user.id));
       }
     })();
   }, []);

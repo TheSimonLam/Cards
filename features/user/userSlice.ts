@@ -3,18 +3,29 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { fetchAddUserMoney, fetchUserByUserId } from "./userThunks";
+import { fetchAddUserMoney, fetchDecksByUserId, fetchUserByUserId } from "./userThunks";
 import { RootState } from "../store";
-import { User } from "@/typing/interfaces";
+import { Deck, User } from "@/typing/interfaces";
 
 export interface UserState {
   value: number;
-  userDetails: User | {}
+  userDetails: User
+  decks: Deck[]
 }
 
 const initialState: UserState = {
   value: 0,
-  userDetails: {}
+  userDetails: {
+    background_pic: '',
+    balance: 0,
+    created_at: new Date(),
+    display_name: '',
+    email_address: '',
+    profile_pic: '',
+    tagline: '',
+    user_id: ''
+  },
+  decks: []
 };
 
 export const userSlice = createSlice({
@@ -37,6 +48,9 @@ export const userSlice = createSlice({
     }),
     builder.addCase(fetchAddUserMoney.fulfilled, (state, action) => {
       state.userDetails = action.payload
+    }),
+    builder.addCase(fetchDecksByUserId.fulfilled, (state, action) => {
+      state.decks = action.payload
     })
   },
 });
@@ -55,4 +69,9 @@ export const selectUserValue = createSelector(
 export const selectUserDetails = createSelector(
   selectUser,
   (user) => user.userDetails
+);
+
+export const selectDecks = createSelector(
+  selectUser,
+  (user) => user.decks
 );

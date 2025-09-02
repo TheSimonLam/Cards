@@ -16,8 +16,8 @@ export const DeckButton = ({ title, onDeckButtonPress }: DeckProps) => {
         <Image
           source={{
             uri:
-              title === "Unorganized"
-                ? "https://cdn-icons-png.flaticon.com/512/6688/6688557.png"
+              title === "Storage"
+                ? "https://png.pngtree.com/png-clipart/20240621/original/pngtree-box-crate-in-pixel-art-style-png-image_15378314.png"
                 : title === "New Deck"
                 ? "https://cdn-icons-png.flaticon.com/512/2661/2661440.png"
                 : "https://i.ebayimg.com/00/s/MTU5OVgxMTMw/z/ROoAAOSw~7Nf7ibu/$_57.JPG?set_id=8800005007",
