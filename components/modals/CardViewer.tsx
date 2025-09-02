@@ -8,8 +8,8 @@ export const CardViewer = () => {
   const cards = useSelector(selectCardViewerOpenWithCards);
   return (
     <>
-      {cards.map((card) => (
-        <View key={card.card_metadata_id}>
+      {cards.map((card, index) => (
+        <View key={`${index}-${card.card_metadata_id}`}>
           <Text>{card.name}</Text>
           <Text>{CardRarityMapper[card.rarity]}</Text>
         </View>

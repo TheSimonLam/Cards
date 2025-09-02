@@ -19,7 +19,7 @@ import {
 import {
   fetchDeckById,
   fetchDecksByUserId,
-} from "@/features/cards/cardsThunks";
+} from "@/features/global/globalThunks";
 import { AuthContext } from "@/providers/AuthProvider";
 import { AppDispatch } from "@/features/store";
 import { useCallback, useContext } from "react";

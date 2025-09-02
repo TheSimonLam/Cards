@@ -5,7 +5,10 @@ import { useContext, useEffect } from "react";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fetchUserByUserId } from "@/features/user/userThunks";
-import { fetchDecksByUserId } from "@/features/cards/cardsThunks";
+import {
+  fetchCardMetadata,
+  fetchDecksByUserId,
+} from "@/features/global/globalThunks";
 
 import { AppDispatch } from "@/features/store";
 import { Text } from "@/elements/Text";
@@ -21,6 +24,7 @@ export default function HomeScreen() {
       if (authSession?.user.id) {
         dispatch(fetchUserByUserId(authSession?.user.id));
         dispatch(fetchDecksByUserId(authSession?.user.id));
+        dispatch(fetchCardMetadata()); //TODO: This will eventually be removed
       }
     })();
   }, []);

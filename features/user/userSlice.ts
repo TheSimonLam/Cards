@@ -4,7 +4,7 @@ import {
 } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { fetchAddUserMoney, fetchUserByUserId } from "./userThunks";
-import { fetchDecksByUserId } from "../cards/cardsThunks";
+import { fetchDecksByUserId } from "../global/globalThunks";
 import { RootState } from "../store";
 import { Deck, User } from "@/typing/interfaces";
 

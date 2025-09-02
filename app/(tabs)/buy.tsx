@@ -6,9 +6,9 @@ import { Text } from "@/elements/Text";
 import { Button } from "@/elements/Button";
 import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPacks } from "@/features/cards/cardsThunks";
+import { fetchPacks } from "@/features/global/globalThunks";
 import { AppDispatch } from "@/features/store";
-import { selectPacks } from "@/features/cards/cardsSlice";
+import { selectPacks } from "@/features/global/globalSlice";
 import { selectUserDetails } from "@/features/user/userSlice";
 import { fetchBuyPack } from "@/features/user/userThunks";
 import { AuthContext } from "@/providers/AuthProvider";
@@ -18,7 +18,7 @@ export default function BuyScreen() {
   const dispatch = useDispatch<AppDispatch>();
   const packs = useSelector(selectPacks);
   const userDetails = useSelector(selectUserDetails) || {};
-  const authSession = useContext(AuthContext)
+  const authSession = useContext(AuthContext);
 
   const onBuyPress = (packId: string) => {
     dispatch(fetchBuyPack({ packId, userId: authSession?.user.id }));

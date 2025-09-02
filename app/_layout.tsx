@@ -23,6 +23,7 @@ import {
   setDeckViewerOpenWithDeckId,
 } from "@/features/global/globalSlice";
 import { CardViewer } from "@/components/modals/CardViewer";
+import { Text } from "@/elements/Text";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -39,15 +40,16 @@ const InitialLayout = () => {
   const [appReady, setAppReady] = useState(false);
   const { initUserPrefs } = useInitUserPreferences();
   const dispatch = useDispatch();
-  const isDeckViewerModalVisible = useSelector(selectDeckViewerOpenWithDeckId);
-  const isCardViewerModalVisible = useSelector(selectCardViewerOpenWithCards);
+  const currentlyViewingDeckId = useSelector(selectDeckViewerOpenWithDeckId);
+  const currentlyViewingCards =
+    useSelector(selectCardViewerOpenWithCards).length > 0;
 
-  const onCloseDeckViewerModal = () => {
-    dispatch(setDeckViewerOpenWithDeckId(""));
-  };
-
-  const onCloseCardViewerModal = () => {
-    dispatch(setCardViewerOpenWithCards([]));
+  const onCloseModal = () => {
+    if (currentlyViewingCards) {
+      dispatch(setCardViewerOpenWithCards([]));
+    } else {
+      dispatch(setDeckViewerOpenWithDeckId(""));
+    }
   };
 
   useEffect(function initApp() {
@@ -83,16 +85,16 @@ const InitialLayout = () => {
     <AuthContext.Provider value={session}>
       <Slot />
       <FullScreenModal
-        isModalVisible={!!isDeckViewerModalVisible}
-        onClosePress={onCloseDeckViewerModal}
+        isModalVisible={currentlyViewingCards || !!currentlyViewingDeckId}
+        onClosePress={onCloseModal}
       >
-        <DeckViewer />
-      </FullScreenModal>
-      <FullScreenModal
-        isModalVisible={isCardViewerModalVisible.length > 0}
-        onClosePress={onCloseCardViewerModal}
-      >
-        <CardViewer />
+        {currentlyViewingCards ? (
+          <CardViewer />
+        ) : currentlyViewingDeckId ? (
+          <DeckViewer />
+        ) : (
+          <></>
+        )}
       </FullScreenModal>
     </AuthContext.Provider>
   );

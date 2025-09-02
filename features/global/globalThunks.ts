@@ -49,3 +49,19 @@ export const fetchDeckById = createAsyncThunk(
         }
     },
 )
+
+// TODO: This will eventually be removed bc of size and instead be hardcoded and linked to app updates/versions for force updating
+export const fetchCardMetadata = createAsyncThunk(
+    'user/fetchCardMetadata',
+    async () => {
+        const { data, error } = await supabase.functions.invoke('get-card-metadata')
+
+        if(error){
+          return undefined
+        }
+        else
+        {
+          return data?.data
+        }
+    },
+)
