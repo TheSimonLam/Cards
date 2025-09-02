@@ -1,14 +1,17 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { fetchBuyPack } from "../user/userThunks";
+import { Card } from "@/types/types";
+import { RootState } from "../store";
 
 export interface GlobalState {
   deckViewerOpenWithDeckId: string;
-  cardViewerOpenWithCardIds: string[];
+  cardViewerOpenWithCards: Card[];
 }
 
 const initialState: GlobalState = {
   deckViewerOpenWithDeckId: '',
-  cardViewerOpenWithCardIds: []
+  cardViewerOpenWithCards: []
 };
 
 export const globalSlice = createSlice({
@@ -18,24 +21,29 @@ export const globalSlice = createSlice({
     setDeckViewerOpenWithDeckId: (state, action: PayloadAction<string>) => {
       state.deckViewerOpenWithDeckId = action.payload;
     },
-    setCardViewerOpenWithCardIds: (state, action: PayloadAction<string[]>) => {
-      state.cardViewerOpenWithCardIds = action.payload;
+    setcardViewerOpenWithCards: (state, action: PayloadAction<Card[]>) => {
+      state.cardViewerOpenWithCards = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchBuyPack.fulfilled, (state, action) => {
+      state.cardViewerOpenWithCards = action.payload.newCards
+    })
   },
 });
 
-export const { setDeckViewerOpenWithDeckId, setCardViewerOpenWithCardIds } = globalSlice.actions;
+export const { setDeckViewerOpenWithDeckId, setcardViewerOpenWithCards } = globalSlice.actions;
 
 export default globalSlice.reducer;
 
-export const selectGlobal = (state: any) => state.global;
+export const selectGlobal = (state: RootState) => state.global;
 
 export const selectDeckViewerOpenWithDeckId = createSelector(
   selectGlobal,
   (global) => global.deckViewerOpenWithDeckId
 );
 
-export const selectCardViewerOpenWithCardIds = createSelector(
+export const selectCardViewerOpenWithCards = createSelector(
   selectGlobal,
-  (global) => global.cardViewerOpenWithCardIds
+  (global) => global.cardViewerOpenWithCards
 );

@@ -3,11 +3,13 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { fetchUserByUserId } from "./userThunks";
+import { fetchAddUserMoney, fetchUserByUserId } from "./userThunks";
+import { RootState } from "../store";
+import { User } from "@/types/types";
 
 export interface UserState {
   value: number;
-  userDetails: any
+  userDetails: User | {}
 }
 
 const initialState: UserState = {
@@ -32,6 +34,9 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchUserByUserId.fulfilled, (state, action) => {
       state.userDetails = action.payload
+    }),
+    builder.addCase(fetchAddUserMoney.fulfilled, (state, action) => {
+      state.userDetails = action.payload
     })
   },
 });
@@ -40,7 +45,7 @@ export const { increment, decrement, incrementByAmount } = userSlice.actions;
 
 export default userSlice.reducer;
 
-export const selectUser = (state: any) => state.user;
+export const selectUser = (state: RootState) => state.user;
 
 export const selectUserValue = createSelector(
   selectUser,

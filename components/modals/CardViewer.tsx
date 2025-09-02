@@ -1,12 +1,14 @@
 import { Text } from "@/elements/Text";
-import { selectCardViewerOpenWithCardIds } from "@/features/global/globalSlice";
+import { selectCardViewerOpenWithCards } from "@/features/global/globalSlice";
 import { useSelector } from "react-redux";
 
 export const CardViewer = () => {
-  const cardIds = useSelector(selectCardViewerOpenWithCardIds);
+  const cards = useSelector(selectCardViewerOpenWithCards);
   return (
     <>
-      <Text>You are viewing cardIds {cardIds}</Text>
+      {cards.map((card: any) => (
+        <Text>You are viewing {card}</Text>
+      ))}
     </>
   );
 };

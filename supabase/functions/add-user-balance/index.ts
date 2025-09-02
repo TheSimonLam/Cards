@@ -43,8 +43,10 @@ Deno.serve(async (req) => {
     return new Response('add-user-balance error', { status: 500 })
   }
 
-    return new Response(
-      error || balanceError ? 'error!' : 'success!',
-      { headers: { "Content-Type": "application/json" } },
-    )
+  const res = {'status': error || balanceError ? "error" : "success"}
+
+  return new Response(
+      JSON.stringify(res),
+    { headers: { "Content-Type": "application/json" } },
+  )
 })

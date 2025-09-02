@@ -39,11 +39,8 @@ export default function ProfileScreen() {
 
   const addMoney = () => {
     dispatch(
-      fetchAddUserMoney({ amount: 20, email: userDetails.email_address })
+      fetchAddUserMoney({ amount: 20, email: userDetails.email_address, userId: authSession?.user.id })
     );
-    if (authSession?.user.id) {
-      dispatch(fetchUserByUserId(authSession?.user.id));
-    }
   };
 
   const onDeckButtonPress = () => {

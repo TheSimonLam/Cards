@@ -4,9 +4,11 @@ import {
 } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { fetchPacks } from "./cardsThunks";
+import { RootState } from "../store";
+import { Pack } from "@/types/types";
 
 export interface CardsState {
-  packs: any[]
+  packs: Pack[]
 }
 
 const initialState: CardsState = {
@@ -32,7 +34,7 @@ export const { setSomething } = cardsSlice.actions;
 
 export default cardsSlice.reducer;
 
-export const selectCards = (state: any) => state.cards;
+export const selectCards = (state: RootState) => state.cards;
 
 export const selectPacks = createSelector(
   selectCards,

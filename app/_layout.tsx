@@ -16,7 +16,12 @@ import { AuthContext } from "@/providers/AuthProvider";
 import { useInitUserPreferences } from "@/hooks/useUser";
 import { FullScreenModal } from "@/components/modals/FullScreenModal";
 import { DeckViewer } from "@/components/modals/DeckViewer";
-import { selectCardViewerOpenWithCardIds, selectDeckViewerOpenWithDeckId, setCardViewerOpenWithCardIds, setDeckViewerOpenWithDeckId } from "@/features/global/globalSlice";
+import {
+  selectCardViewerOpenWithCards,
+  selectDeckViewerOpenWithDeckId,
+  setcardViewerOpenWithCards,
+  setDeckViewerOpenWithDeckId,
+} from "@/features/global/globalSlice";
 import { CardViewer } from "@/components/modals/CardViewer";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -34,15 +39,15 @@ const InitialLayout = () => {
   const [appReady, setAppReady] = useState(false);
   const { initUserPrefs } = useInitUserPreferences();
   const dispatch = useDispatch();
-  const isDeckViewerModalVisible = useSelector(selectDeckViewerOpenWithDeckId)
-  const isCardViewerModalVisible = useSelector(selectCardViewerOpenWithCardIds)
+  const isDeckViewerModalVisible = useSelector(selectDeckViewerOpenWithDeckId);
+  const isCardViewerModalVisible = useSelector(selectCardViewerOpenWithCards);
 
   const onCloseDeckViewerModal = () => {
-    dispatch(setDeckViewerOpenWithDeckId(''));
+    dispatch(setDeckViewerOpenWithDeckId(""));
   };
 
   const onCloseCardViewerModal = () => {
-    dispatch(setCardViewerOpenWithCardIds([]));
+    dispatch(setcardViewerOpenWithCards([]));
   };
 
   useEffect(function initApp() {
