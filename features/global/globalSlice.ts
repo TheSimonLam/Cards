@@ -43,6 +43,7 @@ export const globalSlice = createSlice({
       state.cardViewerOpenWithCards = action.payload.newCards
     }),
     builder.addCase(fetchDeckById.fulfilled, (state, action) => {
+      // This is where we map/enrich card data
       state.deckCards = action.payload.map((cardMetadataId: number)=>state.cardMetadata[cardMetadataId - 1])
     })
   },
