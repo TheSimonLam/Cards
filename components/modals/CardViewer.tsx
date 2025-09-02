@@ -6,8 +6,8 @@ export const CardViewer = () => {
   const cards = useSelector(selectCardViewerOpenWithCards);
   return (
     <>
-      {cards.map((card: any) => (
-        <Text>You are viewing {card}</Text>
+      {cards.map((card) => (
+        <Text>You are viewing {card.name}</Text>
       ))}
     </>
   );
