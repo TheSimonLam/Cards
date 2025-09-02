@@ -1,7 +1,7 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { fetchBuyPack } from "../user/userThunks";
-import { Card } from "@/types/types";
+import { Card } from "@/typing/interfaces";
 import { RootState } from "../store";
 
 export interface GlobalState {

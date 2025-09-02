@@ -5,7 +5,7 @@ import {
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { fetchPacks } from "./cardsThunks";
 import { RootState } from "../store";
-import { Pack } from "@/types/types";
+import { Pack } from "@/typing/interfaces";
 
 export interface CardsState {
   packs: Pack[]

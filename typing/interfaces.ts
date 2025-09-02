@@ -36,4 +36,5 @@ export interface Pack {
     "max_allowed_open_packs": number,
     "name": string
     "num_packs_opened": number,
-    "pack_id": string}
+    "pack_id": string
+}

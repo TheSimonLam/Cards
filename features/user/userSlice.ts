@@ -5,7 +5,7 @@ import {
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { fetchAddUserMoney, fetchUserByUserId } from "./userThunks";
 import { RootState } from "../store";
-import { User } from "@/types/types";
+import { User } from "@/typing/interfaces";
 
 export interface UserState {
   value: number;

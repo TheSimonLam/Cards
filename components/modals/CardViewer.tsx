@@ -1,13 +1,18 @@
 import { Text } from "@/elements/Text";
 import { selectCardViewerOpenWithCards } from "@/features/global/globalSlice";
 import { useSelector } from "react-redux";
+import { CardRarityMapper } from "@/constants/Global";
+import { View } from "react-native";
 
 export const CardViewer = () => {
   const cards = useSelector(selectCardViewerOpenWithCards);
   return (
     <>
       {cards.map((card) => (
-        <Text>You are viewing {card.name}</Text>
+        <View key={card.card_metadata_id}>
+          <Text>{card.name}</Text>
+          <Text>{CardRarityMapper[card.rarity]}</Text>
+        </View>
       ))}
     </>
   );
