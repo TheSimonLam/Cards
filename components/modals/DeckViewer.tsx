@@ -1,9 +1,17 @@
 import { Text } from "@/elements/Text";
-import { selectDeckViewerOpenWithDeckId } from "@/features/global/globalSlice";
+import { selectDeckCardList } from "@/features/cards/cardsSlice";
+import { FlatList } from "react-native";
 import { useSelector } from "react-redux";
 
 export const DeckViewer = () => {
-  const deckId = useSelector(selectDeckViewerOpenWithDeckId)
-  return <>
-  <Text>You are viewing deckId {deckId}</Text></>;
+  const deckCardList = useSelector(selectDeckCardList);
+  return (
+    <>
+      <FlatList
+        data={deckCardList}
+        renderItem={({item: deckCard}) => <Text>{deckCard}</Text>}
+        keyExtractor={(deckCard, index) => `${deckCard}-${index}`}
+      />
+    </>
+  );
 };

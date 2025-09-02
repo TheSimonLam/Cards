@@ -1,7 +1,7 @@
 export interface Card {
     "attack": number,
     "card_metadata_id": number,
-    "created_at": Date,
+    "created_at": Date | undefined,
     "defence": number,
     "description": string,
     "drop_chance_percentage": number,
@@ -14,7 +14,7 @@ export interface Card {
 export interface User {
     "background_pic": string | null,
     "balance": number,
-    "created_at": Date,
+    "created_at": Date | undefined,
     "display_name": string | null,
     "email_address": string,
     "profile_pic": string | null,
@@ -31,7 +31,7 @@ export interface Pack {
     "card_metadata_id_within_6": number,
     "card_metadata_id_within_7": number,
     "cost": number,
-    "created_at": Date,
+    "created_at": Date | undefined,
     "description": string,
     "max_allowed_open_packs": number,
     "name": string
@@ -40,7 +40,7 @@ export interface Pack {
 }
 
 export interface Deck {
-    "created_at": Date,
+    "created_at": Date | undefined,
     "deck_id": string,
     "description": string,
     "is_editable": boolean,

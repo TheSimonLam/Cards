@@ -3,16 +3,18 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { fetchPacks } from "./cardsThunks";
+import { fetchDeckById, fetchPacks } from "./cardsThunks";
 import { RootState } from "../store";
-import { Pack } from "@/typing/interfaces";
+import { Deck, Pack } from "@/typing/interfaces";
 
 export interface CardsState {
-  packs: Pack[]
+  packs: Pack[],
+  deckCardList: string[]
 }
 
 const initialState: CardsState = {
-  packs: []
+  packs: [],
+  deckCardList: []
 };
 
 export const cardsSlice = createSlice({
@@ -27,6 +29,9 @@ export const cardsSlice = createSlice({
     builder.addCase(fetchPacks.fulfilled, (state, action) => {
       state.packs = action.payload
     })
+    builder.addCase(fetchDeckById.fulfilled, (state, action) => {
+      state.deckCardList = action.payload
+    })
   },
 });
 
@@ -39,4 +44,9 @@ export const selectCards = (state: RootState) => state.cards;
 export const selectPacks = createSelector(
   selectCards,
   (cards) => cards.packs
+);
+
+export const selectDeckCardList = createSelector(
+  selectCards,
+  (cards) => cards.deckCardList
 );

@@ -4,7 +4,9 @@ import { useDispatch } from "react-redux";
 import { useContext, useEffect } from "react";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { fetchDecksByUserId, fetchUserByUserId } from "@/features/user/userThunks";
+import { fetchUserByUserId } from "@/features/user/userThunks";
+import { fetchDecksByUserId } from "@/features/cards/cardsThunks";
+
 import { AppDispatch } from "@/features/store";
 import { Text } from "@/elements/Text";
 import { AuthContext } from "@/providers/AuthProvider";

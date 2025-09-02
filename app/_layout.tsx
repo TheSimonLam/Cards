@@ -19,7 +19,7 @@ import { DeckViewer } from "@/components/modals/DeckViewer";
 import {
   selectCardViewerOpenWithCards,
   selectDeckViewerOpenWithDeckId,
-  setcardViewerOpenWithCards,
+  setCardViewerOpenWithCards,
   setDeckViewerOpenWithDeckId,
 } from "@/features/global/globalSlice";
 import { CardViewer } from "@/components/modals/CardViewer";
@@ -47,7 +47,7 @@ const InitialLayout = () => {
   };
 
   const onCloseCardViewerModal = () => {
-    dispatch(setcardViewerOpenWithCards([]));
+    dispatch(setCardViewerOpenWithCards([]));
   };
 
   useEffect(function initApp() {

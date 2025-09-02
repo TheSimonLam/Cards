@@ -21,7 +21,7 @@ export const globalSlice = createSlice({
     setDeckViewerOpenWithDeckId: (state, action: PayloadAction<string>) => {
       state.deckViewerOpenWithDeckId = action.payload;
     },
-    setcardViewerOpenWithCards: (state, action: PayloadAction<Card[]>) => {
+    setCardViewerOpenWithCards: (state, action: PayloadAction<Card[]>) => {
       state.cardViewerOpenWithCards = action.payload;
     },
   },
@@ -32,7 +32,7 @@ export const globalSlice = createSlice({
   },
 });
 
-export const { setDeckViewerOpenWithDeckId, setcardViewerOpenWithCards } = globalSlice.actions;
+export const { setDeckViewerOpenWithDeckId, setCardViewerOpenWithCards } = globalSlice.actions;
 
 export default globalSlice.reducer;
 

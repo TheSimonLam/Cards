@@ -3,7 +3,8 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { fetchAddUserMoney, fetchDecksByUserId, fetchUserByUserId } from "./userThunks";
+import { fetchAddUserMoney, fetchUserByUserId } from "./userThunks";
+import { fetchDecksByUserId } from "../cards/cardsThunks";
 import { RootState } from "../store";
 import { Deck, User } from "@/typing/interfaces";
 
@@ -18,7 +19,7 @@ const initialState: UserState = {
   userDetails: {
     background_pic: '',
     balance: 0,
-    created_at: new Date(),
+    created_at: undefined,
     display_name: '',
     email_address: '',
     profile_pic: '',

@@ -14,9 +14,12 @@ import { Text } from "@/elements/Text";
 import { supabase } from "@/services/supabase";
 import {
   fetchAddUserMoney,
-  fetchDecksByUserId,
   fetchUserByUserId,
 } from "@/features/user/userThunks";
+import {
+  fetchDeckById,
+  fetchDecksByUserId,
+} from "@/features/cards/cardsThunks";
 import { AuthContext } from "@/providers/AuthProvider";
 import { AppDispatch } from "@/features/store";
 import { useCallback, useContext } from "react";
@@ -49,8 +52,9 @@ export default function ProfileScreen() {
     );
   };
 
-  const onDeckButtonPress = () => {
-    dispatch(setDeckViewerOpenWithDeckId(new Date().toTimeString()));
+  const onDeckButtonPress = (deckId: string) => {
+    dispatch(fetchDeckById(deckId));
+    dispatch(setDeckViewerOpenWithDeckId(deckId));
   };
 
   useFocusEffect(
@@ -93,7 +97,7 @@ export default function ProfileScreen() {
               {decks.map((deck) => (
                 <DeckButton
                   key={deck.deck_id}
-                  onDeckButtonPress={onDeckButtonPress}
+                  onDeckButtonPress={() => onDeckButtonPress(deck.deck_id)}
                   title={deck.name}
                 ></DeckButton>
               ))}

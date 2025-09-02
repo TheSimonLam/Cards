@@ -309,3 +309,14 @@ entrypoint = "./functions/get-decks/index.ts"
 # Specifies static files to be bundled with the function. Supports glob patterns.
 # For example, if you want to serve static HTML pages in your function:
 # static_files = [ "./functions/get-decks/*.html" ]
+
+[functions.get-deck]
+enabled = true
+verify_jwt = true
+import_map = "./functions/get-deck/deno.json"
+# Uncomment to specify a custom file path to the entrypoint.
+# Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
+entrypoint = "./functions/get-deck/index.ts"
+# Specifies static files to be bundled with the function. Supports glob patterns.
+# For example, if you want to serve static HTML pages in your function:
+# static_files = [ "./functions/get-deck/*.html" ]

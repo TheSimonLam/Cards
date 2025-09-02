@@ -53,20 +53,3 @@ export const fetchBuyPack = createAsyncThunk(
       }
   },
 )
-
-export const fetchDecksByUserId = createAsyncThunk(
-    'user/fetchDecksByUserId',
-    async (userId: string) => {
-        const { data, error } = await supabase.functions.invoke('get-decks', {
-          body: JSON.stringify({ userId })
-        })
-
-        if(error){
-          return undefined
-        }
-        else
-        {
-          return data?.data
-        }
-    },
-)

@@ -16,11 +16,27 @@ export const fetchPacks = createAsyncThunk(
     },
 )
 
-//TODO: Not written the edge function yet:
+export const fetchDecksByUserId = createAsyncThunk(
+    'user/fetchDecksByUserId',
+    async (userId: string) => {
+        const { data, error } = await supabase.functions.invoke('get-decks', {
+          body: JSON.stringify({ userId })
+        })
+
+        if(error){
+          return undefined
+        }
+        else
+        {
+          return data?.data
+        }
+    },
+)
+
 export const fetchDeckById = createAsyncThunk(
-    'user/fetchPacks',
+    'user/fetchDeckById',
     async (deckId: string) => {
-        const { data, error } = await supabase.functions.invoke('get-packs', {
+        const { data, error } = await supabase.functions.invoke('get-deck-card-list', {
           body: JSON.stringify({ deckId })
         })
 
