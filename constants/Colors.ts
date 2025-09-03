@@ -3,19 +3,12 @@
  * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
  */
 
-// Primary colors
-const darkBlue = "#003049";
-const red = "#d62828";
-const orange = "#f77f00";
-const yellow = "#fcbf49";
-const paleYellow = "#eae2b7";
-
 export const Colors = {
-  darkBlue,
-  red,
-  orange,
-  yellow,
-  paleYellow,
+  darkBlue:  "#003049",
+  red: "#d62828",
+  orange: "#f77f00",
+  yellow: "#fcbf49",
+  paleYellow: "#eae2b7",
   neutrals: {
     0: '#F2F0EF',
     1: '#efefef',
@@ -23,5 +16,25 @@ export const Colors = {
     3: '#9BA1A6',
     4: '#767676',
     5: '#11181C',
+  },
+  card: {
+    border: {
+      1: "#767676",
+      2: "#767676",
+      3: "#767676",
+      4: "#767676",
+      5: "#767676",
+      6: "#767676",
+      7: "#767676",
+    },
+    body: {
+      1: "#f4efe3",
+      2: "#e9dfc7",
+      3: "#dfceac",
+      4: "#d4be90",
+      5: "#c9ae74",
+      6: "#efbbff",
+      7: "#d896ff",
+    }
   }
 };
