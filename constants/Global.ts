@@ -7,3 +7,5 @@ export const CardRarityMapper : {[key: number]: string} = {
     6: "Legendary",
     7: "One of One"
 }
+
+export const cardSizeScaler = 1.5

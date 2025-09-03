@@ -1,22 +1,34 @@
 import { Colors } from "@/constants/Colors";
+import { MaterialIcons } from "@expo/vector-icons";
 import { Text, TouchableOpacity } from "react-native";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 
-export const enum ButtonVariantTypes {
+export const enum IconButtonVariantTypes {
   SOLID = "solid",
   DISABLED = "disabled",
   OUTLINED = "outlined",
 }
 
-export type ButtonVariant = "solid" | "disabled" | "outlined";
+export type IconButtonVariant = "solid" | "disabled" | "outlined" | "ghost";
 
-type ButtonProps = {
-  text: string;
+type IconButtonProps = {
   onPress: () => void;
-  variant: ButtonVariant;
+  variant: IconButtonVariant;
+  iconName: keyof typeof MaterialIcons.glyphMap;
+  color?: string;
+  size?: number;
 };
 
-export const Button = ({ text, onPress, variant }: ButtonProps) => {
+type StyleProps = {};
+
+type CombinedStyleProps = Partial<IconButtonProps> & StyleProps;
+
+export const IconButton = ({
+  onPress,
+  variant,
+  iconName,
+  size = 32,
+}: IconButtonProps) => {
   const { styles } = useStyles(stylesheet, {
     variant,
   });
@@ -24,20 +36,18 @@ export const Button = ({ text, onPress, variant }: ButtonProps) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={styles.buttonContainer}
-      disabled={variant === ButtonVariantTypes.DISABLED}
+      style={styles.iconButtonContainer({})}
+      disabled={variant === IconButtonVariantTypes.DISABLED}
     >
-      <Text style={styles.buttonText}>{text}</Text>
+      <MaterialIcons size={size} name={iconName} />
     </TouchableOpacity>
   );
 };
 
 const stylesheet = createStyleSheet((theme) => ({
-  buttonContainer: {
-    height: 44,
+  iconButtonContainer: (props: CombinedStyleProps) => ({
+    flexDirection: "row",
     borderRadius: 10,
-    flexDirection: "column",
-    justifyContent: "center",
     alignItems: "center",
     variants: {
       variant: {
@@ -54,19 +64,8 @@ const stylesheet = createStyleSheet((theme) => ({
           borderColor: theme.colors.red,
           backgroundColor: theme.colors.white,
         },
+        ghost: {},
       },
     },
-  },
-  buttonText: {
-    fontSize: 16,
-    fontWeight: "500",
-    color: theme.colors.white,
-    variants: {
-      variant: {
-        solid: {},
-        disabled: { color: theme.colors.darkGrey },
-        outlined: { color: theme.colors.red },
-      },
-    },
-  },
+  }),
 }));

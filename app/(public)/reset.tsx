@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { supabase } from "@/services/supabase";
 
 const PwReset = () => {
-  const { styles } = useStyles(stylesheet);
+  const { styles, theme } = useStyles(stylesheet);
 
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
@@ -54,7 +54,7 @@ const PwReset = () => {
             <Button
               onPress={onRequestReset}
               title="Send Reset Email"
-              color={Colors.red}
+              color={theme.colors.red}
             ></Button>
           </>
         )}
@@ -79,7 +79,7 @@ const PwReset = () => {
             <Button
               onPress={onReset}
               title="Set new Password"
-              color={Colors.red}
+              color={theme.colors.red}
             ></Button>
           </>
         )}
@@ -88,7 +88,7 @@ const PwReset = () => {
   );
 };
 
-const stylesheet = createStyleSheet({
+const stylesheet = createStyleSheet((theme) => ({
   container: {
     flex: 1,
     justifyContent: "center",
@@ -105,7 +105,7 @@ const stylesheet = createStyleSheet({
     marginVertical: 4,
     height: 50,
     borderWidth: 1,
-    borderColor: Colors.red,
+    borderColor: theme.colors.red,
     borderRadius: 4,
     padding: 10,
     backgroundColor: "#fff",
@@ -114,6 +114,6 @@ const stylesheet = createStyleSheet({
     margin: 8,
     alignItems: "center",
   },
-});
+}));
 
 export default PwReset;

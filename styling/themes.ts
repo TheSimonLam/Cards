@@ -33,34 +33,34 @@ const base = {
 
 export const lightTheme = {
   colors: {
-    typography: "#000000",
-    background: "#ffffff",
-    text: "#000000",
+    typography: Colors.neutrals[5],
+    background: Colors.neutrals[0],
+    text: Colors.neutrals[5],
     darkBlue: Colors.darkBlue,
     red: Colors.red,
     orange: Colors.orange,
     yellow: Colors.yellow,
     paleYellow: Colors.paleYellow,
-    white: Colors.white,
-    lightGrey: Colors.lightGrey,
-    darkGrey: Colors.darkGrey,
+    white: Colors.neutrals[0],
+    lightGrey: Colors.neutrals[3],
+    darkGrey: Colors.neutrals[4],
   },
   ...base,
 } as const;
 
 export const darkTheme = {
   colors: {
-    typography: "#ffffff",
-    background: "#000000",
-    text: "#000000",
+    typography: Colors.neutrals[0],
+    background: Colors.neutrals[5],
+    text: Colors.neutrals[5],
     darkBlue: Colors.darkBlue,
     red: Colors.red,
     orange: Colors.orange,
     yellow: Colors.yellow,
     paleYellow: Colors.paleYellow,
-    white: Colors.white,
-    lightGrey: Colors.lightGrey,
-    darkGrey: Colors.darkGrey,
+    white: Colors.neutrals[0],
+    lightGrey: Colors.neutrals[3],
+    darkGrey: Colors.neutrals[4],
   },
   ...base,
 } as const;
@@ -69,17 +69,17 @@ export const darkTheme = {
 
 export const defaultTheme = {
   colors: {
-    typography: "#ffffff",
-    background: "#ffffff",
-    text: "#000000",
+    typography: Colors.neutrals[0],
+    background: Colors.neutrals[0],
+    text: Colors.neutrals[5],
     darkBlue: Colors.darkBlue,
     red: Colors.red,
     orange: Colors.orange,
     yellow: Colors.yellow,
     paleYellow: Colors.paleYellow,
-    white: Colors.white,
-    lightGrey: Colors.lightGrey,
-    darkGrey: Colors.darkGrey,
+    white: Colors.neutrals[0],
+    lightGrey: Colors.neutrals[3],
+    darkGrey: Colors.neutrals[4],
   },
   ...base,
 } as const;

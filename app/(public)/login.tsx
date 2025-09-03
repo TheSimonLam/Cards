@@ -10,6 +10,7 @@ import { supabase } from "@/services/supabase";
 
 const Login = () => {
   const { styles } = useStyles(stylesheet);
+  const { theme } = useStyles();
 
   const [emailAddress, setEmailAddress] = useState("thesimonlam@gmail.com");
   const [password, setPassword] = useState("HelloWorld");
@@ -25,7 +26,11 @@ const Login = () => {
   return (
     <>
       <LinearGradient
-        colors={[Colors.yellow, Colors.paleYellow, Colors.red]}
+        colors={[
+          theme.colors.yellow,
+          theme.colors.paleYellow,
+          theme.colors.red,
+        ]}
         style={styles.background}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
@@ -58,7 +63,7 @@ const Login = () => {
         <Button
           onPress={onSignInPress}
           title="Login"
-          color={Colors.red}
+          color={theme.colors.red}
         ></Button>
 
         <Link href="/reset" asChild>
@@ -76,7 +81,7 @@ const Login = () => {
   );
 };
 
-const stylesheet = createStyleSheet({
+const stylesheet = createStyleSheet((theme) => ({
   container: {
     flex: 1,
     justifyContent: "center",
@@ -99,7 +104,7 @@ const stylesheet = createStyleSheet({
     marginVertical: 4,
     height: 50,
     borderWidth: 1,
-    borderColor: Colors.red,
+    borderColor: theme.colors.red,
     borderRadius: 4,
     padding: 10,
     backgroundColor: "#fff",
@@ -108,6 +113,6 @@ const stylesheet = createStyleSheet({
     margin: 8,
     alignItems: "center",
   },
-});
+}));
 
 export default Login;

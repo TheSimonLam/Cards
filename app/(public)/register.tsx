@@ -9,6 +9,7 @@ import { supabase } from "@/services/supabase";
 
 const Register = () => {
   const { styles } = useStyles(stylesheet);
+  const { theme } = useStyles();
 
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
@@ -58,7 +59,7 @@ const Register = () => {
             <Button
               onPress={onSignUpPress}
               title="Sign up"
-              color={Colors.red}
+              color={theme.colors.red}
             ></Button>
           </>
         )}
@@ -67,7 +68,7 @@ const Register = () => {
   );
 };
 
-const stylesheet = createStyleSheet({
+const stylesheet = createStyleSheet((theme) => ({
   container: {
     flex: 1,
     justifyContent: "center",
@@ -84,7 +85,7 @@ const stylesheet = createStyleSheet({
     marginVertical: 4,
     height: 50,
     borderWidth: 1,
-    borderColor: Colors.red,
+    borderColor: theme.colors.red,
     borderRadius: 4,
     padding: 10,
     backgroundColor: "#fff",
@@ -93,6 +94,6 @@ const stylesheet = createStyleSheet({
     margin: 8,
     alignItems: "center",
   },
-});
+}));
 
 export default Register;

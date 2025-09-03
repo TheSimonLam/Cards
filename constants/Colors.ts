@@ -10,42 +10,18 @@ const orange = "#f77f00";
 const yellow = "#fcbf49";
 const paleYellow = "#eae2b7";
 
-// Dark/Light mode colors
-const tintColorLight = "#fff";
-const tintColorDark = "#fff";
-
-// Regular
-const white = "#fff";
-const lightGrey = "#efefef";
-const darkGrey = "#767676";
-
 export const Colors = {
   darkBlue,
   red,
   orange,
   yellow,
   paleYellow,
-  white,
-  lightGrey,
-  darkGrey,
-  light: {
-    text: "#11181C",
-    background: "#fff",
-    tint: tintColorLight,
-    icon: "#687076",
-    tabIconDefault: "#fff",
-    tabIconSelected: tintColorLight,
-    headerBackgroundColor: red,
-    footerBackgroundColor: red,
-  },
-  dark: {
-    text: "#ECEDEE",
-    background: "#151718",
-    tint: tintColorDark,
-    icon: "#9BA1A6",
-    tabIconDefault: "#fff",
-    tabIconSelected: tintColorDark,
-    headerBackgroundColor: red,
-    footerBackgroundColor: red,
-  },
+  neutrals: {
+    0: '#F2F0EF',
+    1: '#efefef',
+    2: '#ECEDEE',
+    3: '#9BA1A6',
+    4: '#767676',
+    5: '#11181C',
+  }
 };

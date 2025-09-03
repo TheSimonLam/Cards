@@ -1,4 +1,5 @@
 import { Button } from "@/elements/Button";
+import { IconButton } from "@/elements/IconButton";
 import { Modal, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
@@ -38,11 +39,13 @@ export const FullScreenModal = ({
         <View
           style={styles.modalContainer({ backgroundColor, topSafeAreaInset })}
         >
-          <Button
-            onPress={onClosePress}
-            text="Close"
-            variant="outlined"
-          ></Button>
+          <View style={styles.closeButtonContainer}>
+            <IconButton
+              onPress={onClosePress}
+              variant="ghost"
+              iconName="close"
+            />
+          </View>
 
           {children}
         </View>
@@ -57,4 +60,8 @@ const stylesheet = createStyleSheet((theme) => ({
     backgroundColor: props.backgroundColor,
     marginTop: props.topSafeAreaInset,
   }),
+  closeButtonContainer: {
+    alignItems: "flex-end",
+    paddingRight: theme.margins.md,
+  },
 }));
