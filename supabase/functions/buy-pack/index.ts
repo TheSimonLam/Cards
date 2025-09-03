@@ -60,6 +60,8 @@ Deno.serve(async (req) => {
   const pack = packData[0]
   const profile = userData[0]
 
+  // TODO: add the max_allowed_open_packs vs num_packs_opened check
+
   if(profile.balance && (profile.balance - pack.cost >= 0)){
     const { data: cardsData, error: cardsDataError } = await supabase
     .from('card_metadata')
@@ -82,6 +84,8 @@ Deno.serve(async (req) => {
     const sixthCard = cardsData[5]
     const seventhCard = cardsData[6]
 
+    //TODO: Check the card's max_allowed_in_circulation vs amount_in_circulation
+
     const newCards = getThreeRandomCards([firstCard, secondCard, thirdCard, fourthCard, fifthCard, sixthCard, seventhCard]);
 
     const { data: userDeckData, error: userDeckDataError } = await supabase
@@ -97,6 +101,8 @@ Deno.serve(async (req) => {
       { deck_id: userDeckData[0].deck_id, user_id: userId, card_metadata_id: newCards[2].card_metadata_id },
     ])
     .select()
+
+    // TODO: Add +1 to amount_in_circulation for all the new cards that have been added
 
     const { data: deductBalanceData, deductBalanceDataError } = await supabase
     .from('profiles')
