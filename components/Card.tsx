@@ -38,8 +38,9 @@ export const Card = ({ card }: { card: CardType }) => {
           </Text>
         </View>
         <View style={styles.rarityContainer}>
-          {Array.from({ length: card.rarity }).map(() => (
+          {Array.from({ length: card.rarity }).map((_num, index) => (
             <Image
+              key={index}
               source={{
                 uri: "https://www.freeiconspng.com/uploads/yellow-star-icon-21.png",
               }}
