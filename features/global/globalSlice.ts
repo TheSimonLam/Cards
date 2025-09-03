@@ -40,7 +40,8 @@ export const globalSlice = createSlice({
       state.cardMetadata = action.payload
     }),
     builder.addCase(fetchBuyPack.fulfilled, (state, action) => {
-      state.cardViewerOpenWithCards = action.payload.newCards
+      const newCardsSortedByRarity = action.payload.newCards.sort((a: Card, b: Card)=>a.rarity - b.rarity)
+      state.cardViewerOpenWithCards = newCardsSortedByRarity
     }),
     builder.addCase(fetchDeckById.fulfilled, (state, action) => {
       // This is where we map/enrich card data
