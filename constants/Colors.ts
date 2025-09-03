@@ -18,6 +18,10 @@ export const Colors = {
     5: '#11181C',
   },
   card: {
+    base: {
+      text: "#11181C",
+      indents: "#767676"
+    },
     border: {
       1: "#767676",
       2: "#767676",
@@ -30,11 +34,11 @@ export const Colors = {
     body: {
       1: "#f4efe3",
       2: "#e9dfc7",
-      3: "#dfceac",
-      4: "#d4be90",
-      5: "#c9ae74",
-      6: "#efbbff",
-      7: "#d896ff",
+      3: "#efbbff",
+      4: "#d896ff",
+      5: "#73E6CB",
+      6: "#3EBB9E",
+      7: "#fff",
     }
   }
 };

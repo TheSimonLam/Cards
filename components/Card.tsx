@@ -2,7 +2,7 @@ import { Colors } from "@/constants/Colors";
 import { CardRarityMapper, cardSizeScaler } from "@/constants/Global";
 import { Text } from "@/elements/Text";
 import { Card as CardType } from "@/typing/interfaces";
-import { Dimensions, Image, View } from "react-native";
+import { Dimensions, Image, ImageBackground, View } from "react-native";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 
 type StyleProps = {
@@ -25,13 +25,31 @@ export const Card = ({ card }: { card: CardType }) => {
       })}
     >
       {card.rarity === 7 && (
-        <Image
+        <ImageBackground
           style={styles.holographic}
           source={require("../assets/images/cards/holographic.jpg")}
-        ></Image>
+          resizeMode="cover"
+        ></ImageBackground>
       )}
-      <Text>{card.name}</Text>
-      <Text>{CardRarityMapper[card.rarity]}</Text>
+      <View style={styles.cardWrapper}>
+        <View style={styles.nameContainer}>
+          <Text fontSize={16} weight="bold">
+            {card.name}
+          </Text>
+        </View>
+        <View style={styles.rarityContainer}>
+          {Array.from({ length: card.rarity }).map(() => (
+            <Image
+              source={{
+                uri: "https://www.freeiconspng.com/uploads/yellow-star-icon-21.png",
+              }}
+              height={cardSizeScaler * 20}
+              width={cardSizeScaler * 20}
+              resizeMode={"cover"}
+            />
+          ))}
+        </View>
+      </View>
     </View>
   );
 };
@@ -50,10 +68,24 @@ const stylesheet = createStyleSheet((theme) => ({
     height: props.cardHeight,
     position: "relative",
   }),
+  cardWrapper: { padding: 10 * cardSizeScaler },
   holographic: {
     position: "absolute",
     height: "100%",
     width: "100%",
     opacity: 0.7,
+    top: 0,
+    left: 0,
+  },
+  nameContainer: {
+    padding: 10 * cardSizeScaler,
+    borderWidth: 2 * cardSizeScaler,
+    borderRadius: 5 * cardSizeScaler,
+    borderColor: Colors.card.base.indents,
+    marginBottom: 5 * cardSizeScaler,
+  },
+  rarityContainer: {
+    flexDirection: "row",
+    padding: 2 * cardSizeScaler,
   },
 }));
