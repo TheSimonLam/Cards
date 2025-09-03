@@ -13,6 +13,7 @@ Deno.serve(async (req) => {
   const { data, error } = await supabase
   .from('card_metadata')
   .select('*')
+  .order('card_metadata_id', { ascending: true })
 
   console.log(error);
 
