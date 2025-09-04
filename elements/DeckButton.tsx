@@ -1,4 +1,4 @@
-import { Image, TouchableHighlight } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { Text } from "./Text";
 
@@ -11,7 +11,7 @@ export const DeckButton = ({ title, onDeckButtonPress }: DeckProps) => {
   const { styles } = useStyles(stylesheet);
 
   return (
-    <TouchableHighlight style={styles.container} onPress={onDeckButtonPress}>
+    <TouchableOpacity style={styles.container} onPress={onDeckButtonPress}>
       <>
         <Image
           source={{
@@ -26,7 +26,7 @@ export const DeckButton = ({ title, onDeckButtonPress }: DeckProps) => {
         />
         <Text>{title}</Text>
       </>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 };
 
