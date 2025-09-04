@@ -1,3 +1,4 @@
+import { CARD_ART_IMAGES } from "@/constants/CardArtImages";
 import { Colors } from "@/constants/Colors";
 import { CardRarityMapper, cardSizeScaler } from "@/constants/Global";
 import { Text } from "@/elements/Text";
@@ -53,9 +54,11 @@ export const Card = ({ card }: { card: CardType }) => {
         </View>
         <View style={styles.cardImageContainer}>
           <Image
-            source={{
-              uri: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c977eabb-4db6-4ef1-9f0c-1fe00e997eaa/dattmhl-56af50b4-f333-43ee-a7be-f5a2f07a1c9a.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2M5NzdlYWJiLTRkYjYtNGVmMS05ZjBjLTFmZTAwZTk5N2VhYVwvZGF0dG1obC01NmFmNTBiNC1mMzMzLTQzZWUtYTdiZS1mNWEyZjA3YTFjOWEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.EPBhWKmOr5antj8qSU36PT2gl0p6BWZTRkRWU0j69fI",
-            }}
+            source={
+              CARD_ART_IMAGES[
+                card.card_metadata_id as keyof typeof CARD_ART_IMAGES
+              ]
+            }
             style={styles.cardImageContainer}
             resizeMode={"cover"}
           />
@@ -80,7 +83,9 @@ export const Card = ({ card }: { card: CardType }) => {
               <MaterialCommunityIcons size={24} name={"sword"} />
             </View>
             <View style={styles.statContainer}>
-              <Text fontSize={20} weight="bold">{card.attack}</Text>
+              <Text fontSize={20} weight="bold">
+                {card.attack}
+              </Text>
             </View>
           </View>
           <View style={styles.statsContainer}>
@@ -88,7 +93,9 @@ export const Card = ({ card }: { card: CardType }) => {
               <MaterialCommunityIcons size={24} name={"shield-half-full"} />
             </View>
             <View style={styles.statContainer}>
-              <Text fontSize={20} weight="bold">{card.defence}</Text>
+              <Text fontSize={20} weight="bold">
+                {card.defence}
+              </Text>
             </View>
           </View>
         </View>
