@@ -1,34 +1,16 @@
-import { Button } from "@/elements/Button";
-import { selectDeckCards, setDeckViewerOpenWithDeckId } from "@/features/global/globalSlice";
-import { setCardViewerOpenWithCards } from "@/features/global/globalSlice";
-import { AppDispatch } from "@/features/store";
-import { reorderCardsByIndex } from "@/utils/utils";
+import { selectDeckCards } from "@/features/global/globalSlice";
 import { FlatList } from "react-native";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { CardListItem } from "../CardListItem";
 
 export const DeckViewer = () => {
-  const cards = useSelector(selectDeckCards);
-  const dispatch = useDispatch<AppDispatch>();
-
-  const onCardPress = (pressedCardIndex: number) => {
-    const reorderedCards = reorderCardsByIndex(cards, pressedCardIndex);
-    dispatch(setCardViewerOpenWithCards(reorderedCards));
-  };
+    const cards = useSelector(selectDeckCards);
 
   return (
     <>
       <FlatList
         data={cards}
-        renderItem={({ item: card, index }) => (
-          <Button
-            onPress={() => {
-              onCardPress(index);
-            }}
-            text={card.name}
-            variant="solid"
-          />
-        )}
+        renderItem={({ item: card, index }) => <CardListItem card={card} index={index}/>}
         keyExtractor={(deckCardMetaDataId, index) =>
           `${deckCardMetaDataId}-${index}`
         }

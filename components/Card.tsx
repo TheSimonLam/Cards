@@ -1,6 +1,6 @@
 import { CARD_ART_IMAGES } from "@/constants/CardArtImages";
 import { Colors } from "@/constants/Colors";
-import { CardRarityMapper, cardSizeScaler } from "@/constants/Global";
+import { cardSizeScaler } from "@/constants/Global";
 import { Text } from "@/elements/Text";
 import { Card as CardType } from "@/typing/interfaces";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
