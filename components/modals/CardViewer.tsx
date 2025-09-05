@@ -24,10 +24,10 @@ export const CardViewer = () => {
         style={{
           width: windowWidth,
         }}
-        mode="parallax"
+        mode="vertical-stack"
         modeConfig={{
-          parallaxScrollingScale: 0.9,
-          parallaxScrollingOffset: 50,
+          moveSize: 500,
+          showLength: 10,
         }}
         onProgressChange={progress}
         renderItem={({ item: card, index }) => (

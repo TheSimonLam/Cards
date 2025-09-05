@@ -38,7 +38,7 @@ export const FullScreenModal = ({
       onRequestClose={onClosePress}
     >
       <GestureHandlerRootView>
-        <Confetti autoplay={false} ref={confettiRef} blastDuration={100} verticalSpacing={100} />
+        <Confetti autoplay={false} ref={confettiRef} verticalSpacing={200} fallDuration={5000} />
         <View
           style={styles.modalContainer({ backgroundColor, topSafeAreaInset })}
         >

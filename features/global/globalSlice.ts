@@ -45,7 +45,7 @@ export const globalSlice = createSlice({
       state.cardViewerOpenWithCards = newCardsSortedByRarity;
       setTimeout(() => {
         confettiRef.current?.restart();
-      }, 1000);
+      }, 500);
     }),
     builder.addCase(fetchDeckById.fulfilled, (state, action) => {
       // This is where we map/enrich card data
