@@ -23,7 +23,6 @@ import {
   setDeckViewerOpenWithDeckId,
 } from "@/features/global/globalSlice";
 import { CardViewer } from "@/components/modals/CardViewer";
-import { Text } from "@/elements/Text";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();

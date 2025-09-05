@@ -6,12 +6,7 @@ import { fetchBuyPack } from "@/features/user/userThunks";
 import { AuthContext } from "@/providers/AuthProvider";
 import { Pack as PackType } from "@/typing/interfaces";
 import { useContext } from "react";
-import {
-  Dimensions,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-} from "react-native";
+import { Alert, Dimensions, Image, TouchableOpacity } from "react-native";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -22,7 +17,11 @@ type StyleProps = {
 
 type CombinedStyleProps = Partial<PackType> & StyleProps;
 
-export const Pack = ({ pack }: { pack: PackType }) => {
+interface PackProps {
+  pack: PackType;
+}
+
+export const Pack = ({ pack }: PackProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const authSession = useContext(AuthContext);
   const userDetails = useSelector(selectUserDetails) || {};
@@ -30,7 +29,11 @@ export const Pack = ({ pack }: { pack: PackType }) => {
   const windowWidth = Dimensions.get("window").width;
 
   const onBuyPress = (packId: string) => {
-    dispatch(fetchBuyPack({ packId, userId: authSession?.user.id }));
+    if (userDetails.balance - pack.cost >= 0) {
+      dispatch(fetchBuyPack({ packId, userId: authSession?.user.id }));
+    } else {
+      Alert.alert("Not enough balance");
+    }
   };
 
   return (
@@ -55,5 +58,5 @@ const stylesheet = createStyleSheet((theme) => ({
     width: props.windowWidth / 2.2,
     marginBottom: theme.margins.md,
   }),
-  packImageContainer: { width: "100%", height: screenSizeScaler * 210},
+  packImageContainer: { width: "100%", height: screenSizeScaler * 210 },
 }));

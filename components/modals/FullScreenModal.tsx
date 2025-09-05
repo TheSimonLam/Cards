@@ -1,6 +1,8 @@
 import { Button } from "@/elements/Button";
+import { confettiRef } from "@/elements/ConfettiRef";
 import { IconButton } from "@/elements/IconButton";
 import { Modal, View } from "react-native";
+import { Confetti } from "react-native-fast-confetti";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
   SafeAreaView,
@@ -36,6 +38,7 @@ export const FullScreenModal = ({
       onRequestClose={onClosePress}
     >
       <GestureHandlerRootView>
+        <Confetti autoplay={false} ref={confettiRef} blastDuration={100} verticalSpacing={100} />
         <View
           style={styles.modalContainer({ backgroundColor, topSafeAreaInset })}
         >
@@ -63,6 +66,6 @@ const stylesheet = createStyleSheet((theme) => ({
   closeButtonContainer: {
     alignItems: "flex-end",
     paddingRight: theme.margins.md,
-    marginBottom: theme.margins.md
+    marginBottom: theme.margins.md,
   },
 }));

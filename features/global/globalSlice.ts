@@ -4,6 +4,7 @@ import { fetchBuyPack } from "../user/userThunks";
 import { Card, Pack } from "@/typing/interfaces";
 import { RootState } from "../store";
 import { fetchCardMetadata, fetchDeckById, fetchPacks } from "./globalThunks";
+import { confettiRef } from "@/elements/ConfettiRef";
 
 export interface GlobalState {
   deckViewerOpenWithDeckId: string;
@@ -41,7 +42,10 @@ export const globalSlice = createSlice({
     }),
     builder.addCase(fetchBuyPack.fulfilled, (state, action) => {
       const newCardsSortedByRarity = action.payload.newCards.sort((a: Card, b: Card)=>a.rarity - b.rarity)
-      state.cardViewerOpenWithCards = newCardsSortedByRarity
+      state.cardViewerOpenWithCards = newCardsSortedByRarity;
+      setTimeout(() => {
+        confettiRef.current?.restart();
+      }, 1000);
     }),
     builder.addCase(fetchDeckById.fulfilled, (state, action) => {
       // This is where we map/enrich card data
