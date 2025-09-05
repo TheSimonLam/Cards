@@ -1,7 +1,6 @@
 import { Text } from "@/elements/Text";
 import { selectCardViewerOpenWithCards } from "@/features/global/globalSlice";
 import { useSelector } from "react-redux";
-import { CardRarityMapper } from "@/constants/Global";
 import { Dimensions, View } from "react-native";
 import { useSharedValue } from "react-native-reanimated";
 import Carousel from "react-native-reanimated-carousel";
