@@ -1,6 +1,6 @@
 import { CARD_ART_IMAGES } from "@/constants/CardArtImages";
 import { Colors } from "@/constants/Colors";
-import { cardSizeScaler } from "@/constants/Global";
+import { screenSizeScaler } from "@/constants/Global";
 import { Text } from "@/elements/Text";
 import { Card as CardType } from "@/typing/interfaces";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -17,7 +17,7 @@ type CombinedStyleProps = CardType & StyleProps;
 export const Card = ({ card }: { card: CardType }) => {
   const { styles } = useStyles(stylesheet);
   const windowWidth = Dimensions.get("window").width;
-  const windowHeight = windowWidth * cardSizeScaler;
+  const windowHeight = windowWidth * screenSizeScaler;
   return (
     <View
       style={styles.cardContainer({
@@ -46,8 +46,8 @@ export const Card = ({ card }: { card: CardType }) => {
               source={{
                 uri: "https://www.freeiconspng.com/uploads/yellow-star-icon-21.png",
               }}
-              height={cardSizeScaler * 20}
-              width={cardSizeScaler * 20}
+              height={screenSizeScaler * 20}
+              width={screenSizeScaler * 20}
               resizeMode={"cover"}
             />
           ))}
@@ -106,8 +106,8 @@ export const Card = ({ card }: { card: CardType }) => {
 
 const stylesheet = createStyleSheet((theme) => ({
   cardContainer: (props: CombinedStyleProps) => ({
-    borderWidth: 5 * cardSizeScaler,
-    borderRadius: 5 * cardSizeScaler,
+    borderWidth: 5 * screenSizeScaler,
+    borderRadius: 5 * screenSizeScaler,
     borderColor:
       Colors.card.border[props.rarity as keyof typeof Colors.card.border],
     backgroundColor:
@@ -118,7 +118,7 @@ const stylesheet = createStyleSheet((theme) => ({
     height: props.cardHeight,
     position: "relative",
   }),
-  cardWrapper: { padding: 10 * cardSizeScaler },
+  cardWrapper: { padding: 10 * screenSizeScaler },
   holographic: {
     position: "absolute",
     height: "100%",
@@ -127,45 +127,45 @@ const stylesheet = createStyleSheet((theme) => ({
     left: 0,
   },
   nameContainer: {
-    padding: 10 * cardSizeScaler,
+    padding: 10 * screenSizeScaler,
     borderWidth: 1,
-    borderRadius: 5 * cardSizeScaler,
+    borderRadius: 5 * screenSizeScaler,
     borderColor: Colors.card.base.indents,
-    marginBottom: 5 * cardSizeScaler,
+    marginBottom: 5 * screenSizeScaler,
     backgroundColor: "rgba(52, 52, 52, 0.2)",
   },
   rarityContainer: {
     flexDirection: "row",
-    padding: 2 * cardSizeScaler,
-    marginBottom: 5 * cardSizeScaler,
+    padding: 2 * screenSizeScaler,
+    marginBottom: 5 * screenSizeScaler,
   },
   cardImageContainer: {
     borderWidth: 1,
     borderColor: Colors.card.base.indents,
     width: "100%",
-    height: cardSizeScaler * 220,
-    borderRadius: cardSizeScaler * 6,
+    height: screenSizeScaler * 220,
+    borderRadius: screenSizeScaler * 6,
   },
   detailsContainer: {
-    paddingLeft: 10 * cardSizeScaler,
-    paddingRight: 10 * cardSizeScaler,
-    paddingBottom: 10 * cardSizeScaler,
+    paddingLeft: 10 * screenSizeScaler,
+    paddingRight: 10 * screenSizeScaler,
+    paddingBottom: 10 * screenSizeScaler,
     width: "100%",
     flexDirection: "row",
     flex: 1,
   },
   detailsColumnContainer: {
     flex: 1,
-    padding: 10 * cardSizeScaler,
+    padding: 10 * screenSizeScaler,
     borderWidth: 1,
-    borderRadius: 5 * cardSizeScaler,
+    borderRadius: 5 * screenSizeScaler,
     borderColor: Colors.card.base.indents,
-    marginBottom: 5 * cardSizeScaler,
+    marginBottom: 5 * screenSizeScaler,
     backgroundColor: "rgba(52, 52, 52, 0.2)",
     height: "100%",
   },
-  detailsColumnContainerLeft: { marginRight: 10 * cardSizeScaler },
-  detailsColumnContainerRight: { marginLeft: 10 * cardSizeScaler },
+  detailsColumnContainerLeft: { marginRight: 10 * screenSizeScaler },
+  detailsColumnContainerRight: { marginLeft: 10 * screenSizeScaler },
   statsContainer: {
     width: "100%",
     flex: 1,

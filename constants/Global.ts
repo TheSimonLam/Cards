@@ -8,4 +8,4 @@ export const CardRarityMapper : {[key: number]: string} = {
     7: "One of One"
 }
 
-export const cardSizeScaler = 1.5
+export const screenSizeScaler = 1.5

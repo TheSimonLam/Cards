@@ -63,5 +63,6 @@ const stylesheet = createStyleSheet((theme) => ({
   closeButtonContainer: {
     alignItems: "flex-end",
     paddingRight: theme.margins.md,
+    marginBottom: theme.margins.md
   },
 }));
