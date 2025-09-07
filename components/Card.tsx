@@ -5,6 +5,7 @@ import { Text } from "@/elements/Text";
 import { Card as CardType } from "@/typing/interfaces";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Dimensions, Image, ImageBackground, View } from "react-native";
+import { Shimmer } from "react-native-fast-shimmer";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 
 type StyleProps = {
@@ -19,88 +20,107 @@ export const Card = ({ card }: { card: CardType }) => {
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = windowWidth * screenSizeScaler;
   return (
-    <View
-      style={styles.cardContainer({
-        cardWidth: windowWidth,
-        cardHeight: windowHeight,
-        ...card,
-      })}
-    >
+    <>
       {card.rarity === 7 && (
-        <ImageBackground
-          style={styles.holographic}
-          source={require("../assets/images/cards/holographic.jpg")}
-          resizeMode="cover"
-        ></ImageBackground>
+        <Shimmer
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            zIndex: 99,
+            width: windowWidth,
+            height: windowHeight,
+          }}
+          linearGradients={[
+            "transparent",
+            "#fafafa",
+            "transparent",
+          ]}
+        />
       )}
-      <View style={styles.cardWrapper}>
-        <View style={styles.nameContainer}>
-          <Text fontSize={16} weight="bold">
-            {card.name}
-          </Text>
-        </View>
-        <View style={styles.rarityContainer}>
-          {Array.from({ length: card.rarity }).map((_num, index) => (
+      <View
+        style={styles.cardContainer({
+          cardWidth: windowWidth,
+          cardHeight: windowHeight,
+          ...card,
+        })}
+      >
+        {card.rarity === 7 && (
+          <ImageBackground
+            style={styles.holographic}
+            source={require("../assets/images/cards/holographic.jpg")}
+            resizeMode="cover"
+          ></ImageBackground>
+        )}
+        <View style={styles.cardWrapper}>
+          <View style={styles.nameContainer}>
+            <Text fontSize={16} weight="bold">
+              {card.name}
+            </Text>
+          </View>
+          <View style={styles.rarityContainer}>
+            {Array.from({ length: card.rarity }).map((_num, index) => (
+              <Image
+                key={index}
+                source={{
+                  uri: "https://www.freeiconspng.com/uploads/yellow-star-icon-21.png",
+                }}
+                height={screenSizeScaler * 20}
+                width={screenSizeScaler * 20}
+                resizeMode={"cover"}
+              />
+            ))}
+          </View>
+          <View style={styles.cardImageContainer}>
             <Image
-              key={index}
-              source={{
-                uri: "https://www.freeiconspng.com/uploads/yellow-star-icon-21.png",
-              }}
-              height={screenSizeScaler * 20}
-              width={screenSizeScaler * 20}
+              source={
+                CARD_ART_IMAGES[
+                  card.card_metadata_id as keyof typeof CARD_ART_IMAGES
+                ]
+              }
+              style={styles.cardImageContainer}
               resizeMode={"cover"}
             />
-          ))}
-        </View>
-        <View style={styles.cardImageContainer}>
-          <Image
-            source={
-              CARD_ART_IMAGES[
-                card.card_metadata_id as keyof typeof CARD_ART_IMAGES
-              ]
-            }
-            style={styles.cardImageContainer}
-            resizeMode={"cover"}
-          />
-        </View>
-      </View>
-      <View
-        style={[styles.detailsContainer, styles.detailsColumnContainerLeft]}
-      >
-        <View style={styles.detailsColumnContainer}>
-          <Text fontSize={14} weight="bold">
-            {card.description}
-          </Text>
+          </View>
         </View>
         <View
-          style={[
-            styles.detailsColumnContainer,
-            styles.detailsColumnContainerRight,
-          ]}
+          style={[styles.detailsContainer, styles.detailsColumnContainerLeft]}
         >
-          <View style={styles.statsContainer}>
-            <View style={styles.statContainer}>
-              <MaterialCommunityIcons size={24} name={"sword"} />
-            </View>
-            <View style={styles.statContainer}>
-              <Text fontSize={20} weight="bold">
-                {card.attack}
-              </Text>
-            </View>
+          <View style={styles.detailsColumnContainer}>
+            <Text fontSize={14} weight="bold">
+              {card.description}
+            </Text>
           </View>
-          <View style={styles.statsContainer}>
-            <View style={styles.statContainer}>
-              <MaterialCommunityIcons size={24} name={"shield-half-full"} />
+          <View
+            style={[
+              styles.detailsColumnContainer,
+              styles.detailsColumnContainerRight,
+            ]}
+          >
+            <View style={styles.statsContainer}>
+              <View style={styles.statContainer}>
+                <MaterialCommunityIcons size={24} name={"sword"} />
+              </View>
+              <View style={styles.statContainer}>
+                <Text fontSize={20} weight="bold">
+                  {card.attack}
+                </Text>
+              </View>
             </View>
-            <View style={styles.statContainer}>
-              <Text fontSize={20} weight="bold">
-                {card.defence}
-              </Text>
+            <View style={styles.statsContainer}>
+              <View style={styles.statContainer}>
+                <MaterialCommunityIcons size={24} name={"shield-half-full"} />
+              </View>
+              <View style={styles.statContainer}>
+                <Text fontSize={20} weight="bold">
+                  {card.defence}
+                </Text>
+              </View>
             </View>
           </View>
         </View>
       </View>
-    </View>
+    </>
   );
 };
 

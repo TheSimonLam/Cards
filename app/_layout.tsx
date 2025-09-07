@@ -23,6 +23,7 @@ import {
   setDeckViewerOpenWithDeckId,
 } from "@/features/global/globalSlice";
 import { CardViewer } from "@/components/modals/CardViewer";
+import { ShimmerProvider } from "react-native-fast-shimmer";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -82,19 +83,21 @@ const InitialLayout = () => {
 
   return (
     <AuthContext.Provider value={session}>
-      <Slot />
-      <FullScreenModal
-        isModalVisible={currentlyViewingCards || !!currentlyViewingDeckId}
-        onClosePress={onCloseModal}
-      >
-        {currentlyViewingCards ? (
-          <CardViewer />
-        ) : currentlyViewingDeckId ? (
-          <DeckViewer />
-        ) : (
-          <></>
-        )}
-      </FullScreenModal>
+      <ShimmerProvider duration={2000}>
+        <Slot />
+        <FullScreenModal
+          isModalVisible={currentlyViewingCards || !!currentlyViewingDeckId}
+          onClosePress={onCloseModal}
+        >
+          {currentlyViewingCards ? (
+            <CardViewer />
+          ) : currentlyViewingDeckId ? (
+            <DeckViewer />
+          ) : (
+            <></>
+          )}
+        </FullScreenModal>
+      </ShimmerProvider>
     </AuthContext.Provider>
   );
 };
